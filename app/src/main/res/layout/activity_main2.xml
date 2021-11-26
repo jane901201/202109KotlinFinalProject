@@ -28,42 +28,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <CheckBox
-            android:id="@+id/checkBox"
+        <RadioButton
+            android:id="@+id/radioButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="A餐" />
 
-        <CheckBox
-            android:id="@+id/checkBox2"
+        <RadioButton
+            android:id="@+id/radioButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="B餐" />
 
-        <CheckBox
-            android:id="@+id/checkBox3"
+        <RadioButton
+            android:id="@+id/radioButton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="C餐" />
 
-        <CheckBox
-            android:id="@+id/checkBox4"
+        <RadioButton
+            android:id="@+id/radioButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="D餐" />
-
     </RadioGroup>
-
-    <TextView
-        android:id="@+id/numberTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="132dp"
-        android:layout_marginTop="36dp"
-        android:text="桌號：無"
-        android:textSize="24sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/checkButton"

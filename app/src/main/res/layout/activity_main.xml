@@ -48,9 +48,20 @@
         android:layout_height="116dp"
         android:layout_marginStart="140dp"
         android:layout_marginTop="64dp"
-        android:text="主餐：無\n桌號：無"
+        android:text="主餐：無"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/menuSelectButton" />
+
+    <TextView
+        android:id="@+id/numberInformationTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="148dp"
+        android:layout_marginTop="32dp"
+        android:text="桌號：無"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/menuInformationText" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

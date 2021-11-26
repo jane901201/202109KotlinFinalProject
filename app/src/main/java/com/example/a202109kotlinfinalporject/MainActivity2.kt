@@ -27,14 +27,12 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
         //將變數與 XML 元件綁定
         val checkButton = findViewById<Button>(R.id.checkButton)
-        val numberTextView = findViewById<TextView>(R.id.numberTextView)
         val menuSelectRadioGroup = findViewById<RadioGroup>(R.id.menuSelectRadioGroup)
         checkButton.setOnClickListener {
                 //宣告 Bundle
                 val b = Bundle()
                 b.putString("menu", menuSelectRadioGroup.findViewById<RadioButton>
-                    (menuSelectRadioGroup.checkedRadioButtonId).text.toString())
-                b.putString("number", numberTextView.text.toString())
+                    (menuSelectRadioGroup.checkedRadioButtonId).text.toString()) //Bug
                 //用 Activity.RESULT_OK 標記執行狀態並記錄 Intent
                 setResult(Activity.RESULT_OK, Intent().putExtras(b))
                 finish()

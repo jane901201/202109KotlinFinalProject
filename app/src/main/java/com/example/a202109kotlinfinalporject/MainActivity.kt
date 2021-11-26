@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
              numberInformationTextView.text = "桌號：" + enterNumberEditText.text;
 
             //透過 Intent 切換至 SecActivity 並傳遞 requestCode 作為識別編號
-            //val intent = Intent(this, MainActivity2::class.java)
-            //startActivityForResult(intent, 1)
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivityForResult(intent, 1)
         }
     }
 }
