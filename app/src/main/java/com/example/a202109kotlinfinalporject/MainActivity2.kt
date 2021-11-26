@@ -8,7 +8,7 @@ import android.widget.*
 
 class MainActivity2 : AppCompatActivity() {
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data);
         data?.extras?.let {
             //驗證發出對象，確認 SecActivity 執行的狀態
@@ -19,6 +19,7 @@ class MainActivity2 : AppCompatActivity() {
             }
         }
     }
+    */
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,13 +27,14 @@ class MainActivity2 : AppCompatActivity() {
         setContentView(R.layout.activity_main2)
         //將變數與 XML 元件綁定
         val checkButton = findViewById<Button>(R.id.checkButton)
+        val numberTextView = findViewById<TextView>(R.id.numberTextView)
         val menuSelectRadioGroup = findViewById<RadioGroup>(R.id.menuSelectRadioGroup)
         checkButton.setOnClickListener {
                 //宣告 Bundle
                 val b = Bundle()
-                //取得 EditText 字串內容，把飲料名稱、甜度與冰塊資訊放入 Bundle
-                b.putString("number", menuSelectRadioGroup.findViewById<RadioButton>
+                b.putString("menu", menuSelectRadioGroup.findViewById<RadioButton>
                     (menuSelectRadioGroup.checkedRadioButtonId).text.toString())
+                b.putString("number", numberTextView.text.toString())
                 //用 Activity.RESULT_OK 標記執行狀態並記錄 Intent
                 setResult(Activity.RESULT_OK, Intent().putExtras(b))
                 finish()
