@@ -21,9 +21,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="263dp"
-        android:layout_height="30dp"
+        android:id="@+id/chooseYourPet"
+        android:layout_width="273dp"
+        android:layout_height="45dp"
         android:layout_marginStart="62dp"
         android:layout_marginTop="34dp"
         android:src="@drawable/Please_choose_your_pet"
@@ -31,11 +31,11 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="162dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="232dp"
+        android:id="@+id/boxImageButton"
+        android:layout_width="171dp"
+        android:layout_height="216dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="172dp"
         android:adjustViewBounds="true"
         android:background="#00FFFFFF"
         android:scaleType="fitCenter"
@@ -43,4 +43,62 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/stoneImageButton"
+        android:layout_width="192dp"
+        android:layout_height="168dp"
+        android:layout_marginStart="192dp"
+        android:layout_marginTop="352dp"
+        android:adjustViewBounds="true"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/stone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/eggImageButton"
+        android:layout_width="162dp"
+        android:layout_height="150dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="508dp"
+        android:adjustViewBounds="true"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        android:src="@drawable/egg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/boxTextImageView"
+        android:layout_width="163dp"
+        android:layout_height="103dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="36dp"
+        android:src="@drawable/box_text"
+        app:layout_constraintStart_toEndOf="@+id/boxImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/chooseYourPet" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="91dp"
+        android:layout_height="87dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="17dp"
+        android:src="@drawable/eggtext"
+        app:layout_constraintStart_toEndOf="@+id/eggImageButton"
+        app:layout_constraintTop_toBottomOf="@+id/stoneImageButton" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="168dp"
+        android:layout_height="89dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/stonetext"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/boxImageButton" />
 </androidx.constraintlayout.widget.ConstraintLayout>
