@@ -16,6 +16,7 @@ class MainMenuActivity : AppCompatActivity() {
     private var pet: String = ""
     private var coin: Int = 0
     private lateinit var sqlLiteDatabase: SQLiteDatabase
+    private var foodItem: ArrayList<FoodItem> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +89,10 @@ class MainMenuActivity : AppCompatActivity() {
 
 
         if(userName == "" && pet == "") {
+
+
+
+
             val intent = Intent( this, ChoosePetActivity::class.java)
             register.launch(intent)
         }
@@ -103,6 +108,14 @@ class MainMenuActivity : AppCompatActivity() {
         }else if(pet == "石頭") {
             petImageButton.setImageResource(R.drawable.stone)
         }
+    }
+
+    private fun SetFoodItem() {
+        var photo: Int = 0
+        var name: String = ""
+        var price: Int = 0
+
+        foodItem.add(FoodItem(photo, name, price))
     }
 
     private fun showToast(text: String) =

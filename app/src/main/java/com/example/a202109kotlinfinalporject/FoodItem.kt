@@ -1,6 +1,7 @@
 package com.example.a202109kotlinfinalporject
 
-data class Item (
+//TODO:Must Fix this problem
+data class FoodItem (
     val photo: Int, //圖片
     val name: String, //名稱
     val price: Int //價格
