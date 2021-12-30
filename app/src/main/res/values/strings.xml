@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">202109KotlinFinalPorject</string>
+
+    <integer-array name="food_image_list">
+        <item>@drawable/fire_egg</item>
+        <item>@drawable/glue_box</item>
+        <item>@drawable/oil_egg</item>
+        <item>@drawable/pickaxe_stone</item>
+        <item>@drawable/scissor_box</item>
+        <item>@drawable/sandpaper_stone</item>
+    </integer-array>
+
 </resources>

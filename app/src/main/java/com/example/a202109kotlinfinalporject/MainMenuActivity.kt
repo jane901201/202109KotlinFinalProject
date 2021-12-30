@@ -15,8 +15,12 @@ class MainMenuActivity : AppCompatActivity() {
     private var userName: String = ""
     private var pet: String = ""
     private var coin: Int = 0
+
+
     private lateinit var sqlLiteDatabase: SQLiteDatabase
-    private var foodItem: ArrayList<FoodItem> = ArrayList()
+    private var foodItems: ArrayList<FoodItem> = ArrayList()
+    private lateinit var userData: UserData
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,23 +79,20 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun registerUserNameAndChoosePet() {
-        val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-            if(it.resultCode == Activity.RESULT_OK){
-                //讀取並顯示寵物選擇頁返回的資料
-                findViewById<TextView>(R.id.petNameTextView).text= it.data?.getStringExtra("name")+
-                        "的寵物"+it.data?.getStringExtra("pet")
-                userName = it.data?.getStringExtra("name").toString()
-                pet = it.data?.getStringExtra("pet").toString()
-
-                setPetImage()
-            }
-        }
 
 
         if(userName == "" && pet == "") {
+            val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                if(it.resultCode == Activity.RESULT_OK){
+                    //讀取並顯示寵物選擇頁返回的資料
+                    findViewById<TextView>(R.id.petNameTextView).text= it.data?.getStringExtra("name")+
+                            "的寵物"+it.data?.getStringExtra("pet")
+                    userName = it.data?.getStringExtra("name").toString()
+                    pet = it.data?.getStringExtra("pet").toString()
 
-
-
+                    setPetImage()
+                }
+            }
 
             val intent = Intent( this, ChoosePetActivity::class.java)
             register.launch(intent)
@@ -115,7 +116,7 @@ class MainMenuActivity : AppCompatActivity() {
         var name: String = ""
         var price: Int = 0
 
-        foodItem.add(FoodItem(photo, name, price))
+        foodItems.add(FoodItem(photo, name, count = 0, price))
     }
 
     private fun showToast(text: String) =
