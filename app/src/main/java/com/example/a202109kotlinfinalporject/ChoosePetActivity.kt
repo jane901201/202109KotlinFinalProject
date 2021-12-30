@@ -22,7 +22,6 @@ class ChoosePetActivity : AppCompatActivity() {
         var boxImageButton = findViewById<ImageButton>(R.id.boxImageButton)
         var eggImageButton = findViewById<ImageButton>(R.id.eggImageButton)
         var stoneImageButton = findViewById<ImageButton>(R.id.stoneImageButton)
-        //var editTextTextPersonName = findViewById<EditText>(R.id.editTextTextPersonName)
 
         boxImageButton.setOnClickListener {
             choosePet = "箱子"

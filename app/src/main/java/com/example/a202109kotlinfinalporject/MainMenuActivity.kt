@@ -2,7 +2,7 @@ package com.example.a202109kotlinfinalporject
 
 import android.app.Activity
 import android.content.Intent
-import android.media.Image
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -14,11 +14,66 @@ class MainMenuActivity : AppCompatActivity() {
 
     private var userName: String = ""
     private var pet: String = ""
+    private var coin: Int = 0
+    private lateinit var sqlLiteDatabase: SQLiteDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mainmenu)
 
+        sqlLiteDatabase = MyDBHelper(this).writableDatabase
+
+        setSQL()
+        registerUserNameAndChoosePet()
+        setListener()
+
+    }
+
+    override fun onDestroy() {
+        sqlLiteDatabase.close()
+        super.onDestroy()
+    }
+
+    private fun setSQL() {
+        try {
+            /*sqlLiteDatabase.execSQL(
+                "INSERT INTO FoodTable(name, count, price) VALUES(?, ?, ?)",
+                arrayOf(ed_number.text.toString(),
+                    ed_name.text.toString(), ed_phone.text.toString(), ed_address.text.toString())
+            )*/
+        } catch (e: Exception) {
+            showToast("新增失敗:$e")
+        }
+    }
+
+    private fun setListener() {
+        val petButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
+        val storeButton = findViewById<ImageButton>(R.id.openStoreImageButton)
+        val bookKeepingButton = findViewById<ImageButton>(R.id.openBookkeepingImageButton)
+        val recordsButton = findViewById<ImageButton>(R.id.openRecordsImageButton)
+
+        petButton.setOnClickListener {
+            showToast("petButton")
+            startActivity(Intent(this, FeedPetActivity::class.java))
+        }
+
+        storeButton.setOnClickListener {
+            showToast("storeButton")
+            startActivity(Intent(this, PetFoodStoreActivity::class.java))
+        }
+
+        bookKeepingButton.setOnClickListener {
+            showToast("bookKeeping")
+            startActivity(Intent(this, BookkeepingActivity::class.java))
+        }
+
+        recordsButton.setOnClickListener {
+            showToast("recordsButton")
+            startActivity(Intent(this, RecordsActivity::class.java))
+        }
+    }
+
+    private fun registerUserNameAndChoosePet() {
         val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
                 //讀取並顯示寵物選擇頁返回的資料
