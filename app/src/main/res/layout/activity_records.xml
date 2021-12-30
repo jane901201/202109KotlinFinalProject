@@ -97,6 +97,7 @@
     </LinearLayout>
 
     <ListView
+        android:id="@+id/recordsListView"
         android:layout_width="409dp"
         android:layout_height="524dp"
         android:layout_marginStart="1dp"

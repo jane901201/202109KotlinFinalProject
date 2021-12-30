@@ -35,7 +35,7 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        sqlLiteDatabase.close()
+        sqlLiteDatabase.close() //TODO:May have some problem
         super.onDestroy()
     }
 
