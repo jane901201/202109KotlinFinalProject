@@ -36,9 +36,6 @@ class MainMenuActivity : AppCompatActivity() {
             val intent = Intent( this, ChoosePetActivity::class.java)
             register.launch(intent)
         }
-
-        //setPetImage()
-
     }
 
     private fun setPetImage() {
