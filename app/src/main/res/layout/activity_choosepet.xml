@@ -20,16 +20,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/chooseYourPet"
-        android:layout_width="273dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="62dp"
-        android:layout_marginTop="34dp"
-        android:src="@drawable/Please_choose_your_pet"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
-
     <ImageButton
         android:id="@+id/boxImageButton"
         android:layout_width="171dp"
@@ -77,10 +67,10 @@
         android:layout_width="163dp"
         android:layout_height="103dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="58dp"
         android:src="@drawable/box_text"
         app:layout_constraintStart_toEndOf="@+id/boxImageButton"
-        app:layout_constraintTop_toBottomOf="@+id/chooseYourPet" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
         android:id="@+id/imageView4"
@@ -101,4 +91,14 @@
         android:src="@drawable/stonetext"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/boxImageButton" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:srcCompat="@drawable/please_choose_your_pet" />
 </androidx.constraintlayout.widget.ConstraintLayout>
