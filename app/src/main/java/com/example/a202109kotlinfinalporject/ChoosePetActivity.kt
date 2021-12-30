@@ -22,22 +22,22 @@ class ChoosePetActivity : AppCompatActivity() {
         var boxImageButton = findViewById<ImageButton>(R.id.boxImageButton)
         var eggImageButton = findViewById<ImageButton>(R.id.eggImageButton)
         var stoneImageButton = findViewById<ImageButton>(R.id.stoneImageButton)
-        var editTextTextPersonName = findViewById<EditText>(R.id.editTextTextPersonName)
+        //var editTextTextPersonName = findViewById<EditText>(R.id.editTextTextPersonName)
 
         boxImageButton.setOnClickListener {
-            choosePet = "box"
+            choosePet = "箱子"
             showToast("Choose ${choosePet}")
             nextActivitySetting()
         }
 
         eggImageButton.setOnClickListener {
-            choosePet = "egg"
+            choosePet = "蛋"
             showToast("Choose ${choosePet}")
             nextActivitySetting()
         }
 
         stoneImageButton.setOnClickListener {
-            choosePet = "stone"
+            choosePet = "石頭"
             showToast("Choose ${choosePet}")
             nextActivitySetting()
         }
@@ -47,9 +47,10 @@ class ChoosePetActivity : AppCompatActivity() {
         Toast.makeText(this,text, Toast.LENGTH_LONG).show()
 
     private fun nextActivitySetting() {
-
-
-
-        startActivity(Intent(this, MainMenuActivity::class.java))
+        val bundle = Bundle()
+        bundle.putString("name","${findViewById<EditText>(R.id.editTextTextPersonName).text}")
+        bundle.putString("pet", choosePet)
+        setResult(RESULT_OK, Intent().putExtras(bundle))
+        finish()
     }
 }

@@ -32,7 +32,7 @@
         android:id="@+id/petNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="156dp"
+        android:layout_marginStart="96dp"
         android:layout_marginTop="116dp"
         android:text="XXX的寵物"
         android:textSize="20sp"
