@@ -19,7 +19,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     private lateinit var sqlLiteDatabase: SQLiteDatabase
     private var foodItems: ArrayList<FoodItem> = ArrayList()
-    private lateinit var userData: UserData
+    private var userData: UserData = UserData("", "", 999)//TODO:Test coin
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -52,20 +52,8 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun setListener() {
-        val petButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
-        val storeButton = findViewById<ImageButton>(R.id.openStoreImageButton)
         val bookKeepingButton = findViewById<ImageButton>(R.id.openBookkeepingImageButton)
         val recordsButton = findViewById<ImageButton>(R.id.openRecordsImageButton)
-
-        petButton.setOnClickListener {
-            showToast("petButton")
-            startActivity(Intent(this, FeedPetActivity::class.java))
-        }
-
-        storeButton.setOnClickListener {
-            showToast("storeButton")
-            startActivity(Intent(this, PetFoodStoreActivity::class.java))
-        }
 
         bookKeepingButton.setOnClickListener {
             showToast("bookKeeping")
@@ -76,19 +64,40 @@ class MainMenuActivity : AppCompatActivity() {
             showToast("recordsButton")
             startActivity(Intent(this, RecordsActivity::class.java))
         }
+
+        setStoreButton()
+        setPetButton()
+    }
+
+    private fun setStoreButton() {
+        val storeButton = findViewById<ImageButton>(R.id.openStoreImageButton)
+
+        storeButton.setOnClickListener {
+            showToast("storeButton")
+            startActivity(Intent(this, PetFoodStoreActivity::class.java))
+        }
+    }
+
+    private fun setPetButton() {
+        val petButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
+
+        petButton.setOnClickListener {
+            showToast("petButton")
+            startActivity(Intent(this, FeedPetActivity::class.java))
+        }
     }
 
     private fun registerUserNameAndChoosePet() {
 
 
-        if(userName == "" && pet == "") {
+            if(userData.name == "" && userData.pet == "") {
             val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 if(it.resultCode == Activity.RESULT_OK){
                     //讀取並顯示寵物選擇頁返回的資料
                     findViewById<TextView>(R.id.petNameTextView).text= it.data?.getStringExtra("name")+
                             "的寵物"+it.data?.getStringExtra("pet")
-                    userName = it.data?.getStringExtra("name").toString()
-                    pet = it.data?.getStringExtra("pet").toString()
+                    userData.name = it.data?.getStringExtra("name").toString()
+                    userData.pet = it.data?.getStringExtra("pet").toString()
 
                     setPetImage()
                 }
@@ -102,11 +111,11 @@ class MainMenuActivity : AppCompatActivity() {
     private fun setPetImage() {
         val petImageButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
 
-        if(pet == "箱子") {
+        if(userData.pet == "箱子") {
             petImageButton.setImageResource(R.drawable.box)
-        }else if(pet == "蛋") {
+        }else if(userData.pet == "蛋") {
             petImageButton.setImageResource(R.drawable.egg)
-        }else if(pet == "石頭") {
+        }else if(userData.pet == "石頭") {
             petImageButton.setImageResource(R.drawable.stone)
         }
     }
