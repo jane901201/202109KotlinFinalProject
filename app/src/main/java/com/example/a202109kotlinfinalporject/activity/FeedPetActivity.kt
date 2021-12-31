@@ -1,22 +1,24 @@
-package com.example.a202109kotlinfinalporject
+package com.example.a202109kotlinfinalporject.activity
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.*
+import android.widget.Button
+import android.widget.GridView
+import com.example.a202109kotlinfinalporject.MyAdapter
+import com.example.a202109kotlinfinalporject.R
+import com.example.a202109kotlinfinalporject.dataclass.FoodItem
 
-class PetFoodStoreActivity : AppCompatActivity() {
+class FeedPetActivity : AppCompatActivity() {
 
-    private lateinit var foodItem: FoodItem
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pet_food_store)
+        setContentView(R.layout.activity_feed_pet)
 
         setListener()
         //TODO:setGridView()
-
-
     }
 
     private fun setGridView() {
@@ -46,12 +48,13 @@ class PetFoodStoreActivity : AppCompatActivity() {
         gridView.onItemClickListener
     }
 
+
     private fun setListener() {
         setReturnButton()
     }
 
     private fun setReturnButton() {
-        var returnButton = findViewById<Button>(R.id.storeReturnButton)
+        var returnButton = findViewById<Button>(R.id.feedPetReturnButton)
 
         returnButton.setOnClickListener {
             startActivity(Intent(this, MainMenuActivity::class.java))

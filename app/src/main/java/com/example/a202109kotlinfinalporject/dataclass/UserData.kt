@@ -1,4 +1,4 @@
-package com.example.a202109kotlinfinalporject
+package com.example.a202109kotlinfinalporject.dataclass
 
 data class UserData(
     var name: String,

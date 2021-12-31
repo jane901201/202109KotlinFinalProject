@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.202109KotlinFinalPorject">
         <activity
-            android:name=".PetFoodStoreActivity"
+            android:name=".activity.PetFoodStoreActivity"
             android:exported="true" />
         <activity
-            android:name=".RecordsActivity"
+            android:name=".activity.RecordsActivity"
             android:exported="true" />
         <activity
-            android:name=".BookkeepingActivity"
+            android:name=".activity.BookkeepingActivity"
             android:exported="true" />
         <activity
-            android:name=".FeedPetActivity"
+            android:name=".activity.FeedPetActivity"
             android:exported="true" />
         <activity
-            android:name=".ChoosePetActivity"
+            android:name=".activity.ChoosePetActivity"
             android:exported="true" />
         <activity
-            android:name=".MainMenuActivity"
+            android:name=".activity.MainMenuActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

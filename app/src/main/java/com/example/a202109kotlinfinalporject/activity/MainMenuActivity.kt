@@ -1,4 +1,4 @@
-package com.example.a202109kotlinfinalporject
+package com.example.a202109kotlinfinalporject.activity
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,10 @@ import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import com.example.a202109kotlinfinalporject.MyDBHelper
+import com.example.a202109kotlinfinalporject.R
+import com.example.a202109kotlinfinalporject.dataclass.FoodItem
+import com.example.a202109kotlinfinalporject.dataclass.UserData
 
 class MainMenuActivity : AppCompatActivity() {
 

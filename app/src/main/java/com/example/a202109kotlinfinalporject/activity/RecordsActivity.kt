@@ -1,12 +1,13 @@
-package com.example.a202109kotlinfinalporject
+package com.example.a202109kotlinfinalporject.activity
 
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.AdapterView
 import android.widget.Button
 import android.widget.ListView
+import com.example.a202109kotlinfinalporject.MyDBHelper
+import com.example.a202109kotlinfinalporject.R
 
 class RecordsActivity : AppCompatActivity() {
 

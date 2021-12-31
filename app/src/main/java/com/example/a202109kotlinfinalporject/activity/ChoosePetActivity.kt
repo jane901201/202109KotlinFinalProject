@@ -1,10 +1,10 @@
-package com.example.a202109kotlinfinalporject
+package com.example.a202109kotlinfinalporject.activity
 
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.*
+import com.example.a202109kotlinfinalporject.R
 
 class ChoosePetActivity : AppCompatActivity() {
 

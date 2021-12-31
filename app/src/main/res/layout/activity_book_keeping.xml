@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FAF0BF"
-    tools:context=".BookkeepingActivity">
+    tools:context=".activity.BookkeepingActivity">
 
     <EditText
         android:id="@+id/CostEditText"

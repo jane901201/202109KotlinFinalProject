@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import android.widget.TextView
+import com.example.a202109kotlinfinalporject.dataclass.FoodItem
 
 class MyAdapter(context: Context, data: ArrayList<FoodItem>, private val layout: Int) : ArrayAdapter<FoodItem>(context, layout, data) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
