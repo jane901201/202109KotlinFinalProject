@@ -106,7 +106,7 @@ class MainMenuActivity : AppCompatActivity() {
             bundle.putInt("coin", userData.coin)
 
             val intent = Intent( this, PetFoodStoreActivity::class.java)
-            //intent.putExtras(bundle)
+            intent.putExtras(bundle)
             storeRegister.launch(intent)
         }
     }

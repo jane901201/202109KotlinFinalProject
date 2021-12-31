@@ -18,9 +18,9 @@ class PetFoodStoreActivity : AppCompatActivity() {
 
         val petCoin = findViewById<TextView>(R.id.petStorePetCoinTextView)
 
-        //intent?.extras?.let{
-        //    petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
-        //}
+        intent?.extras?.let{
+            petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
+        }
 
 
         setListener()
