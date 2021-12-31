@@ -5,6 +5,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
@@ -27,8 +28,9 @@ class MainMenuActivity : AppCompatActivity() {
 
         sqlLiteDatabase = MyDBHelper(this).writableDatabase
 
+        if(foodItems.count() == 0) setFoodItem()
         setSQL()
-        registerUserNameAndChoosePet()
+        if(userData.name == "" && userData.pet == "") registerUserNameAndChoosePet()
         setListener()
 
     }
@@ -73,7 +75,35 @@ class MainMenuActivity : AppCompatActivity() {
 
         storeButton.setOnClickListener {
             showToast("storeButton")
-            startActivity(Intent(this, PetFoodStoreActivity::class.java))
+            val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+                if(it.resultCode == Activity.RESULT_OK){
+                    //讀取並顯示寵物選擇頁返回的資料
+                    userData.coin = it.data?.getIntExtra("coin", 0)!! //TODO:May have problem
+                    findViewById<TextView>(R.id.petCoinTextView).text= userData.coin.toString()
+                    for(i in 0..foodItems.count()) {
+                        var foodCount: String = "foodCount$i"
+                        foodItems[i].count = it.data?.getIntExtra(foodCount, 0)!!
+                        Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
+                    }
+                }
+            }
+
+            val bundle = Bundle()
+            var foodItemCounts = IntArray(6)
+            for(i in 0..foodItems.count()) {
+                var foodCount: String = "foodCount$i"
+                foodItemCounts[i] = foodItems[i].count
+
+                Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
+            }
+
+            //bundle.putParcelable("foodItems", foodItems)
+            bundle.putIntArray("foodItemsArray", foodItemCounts)
+
+
+            val intent = Intent( this, PetFoodStoreActivity::class.java)
+            intent.putExtras(bundle)
+            register.launch(intent)
         }
     }
 
@@ -87,9 +117,6 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun registerUserNameAndChoosePet() {
-
-
-            if(userData.name == "" && userData.pet == "") {
             val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 if(it.resultCode == Activity.RESULT_OK){
                     //讀取並顯示寵物選擇頁返回的資料
@@ -104,7 +131,6 @@ class MainMenuActivity : AppCompatActivity() {
 
             val intent = Intent( this, ChoosePetActivity::class.java)
             register.launch(intent)
-        }
     }
 
     private fun setPetImage() {
@@ -119,12 +145,33 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
-    private fun SetFoodItem() {
-        var photo: Int = 0
-        var name: String = ""
-        var price: Int = 0
+    private fun setFoodItem() {
+        val foodName = ArrayList<String>()
+        foodName.add("火")
+        foodName.add("油")
+        foodName.add("剪刀")
+        foodName.add("膠水")
+        foodName.add("木鎬")
+        foodName.add("砂紙")
 
-        foodItems.add(FoodItem(photo, name, count = 0, price))
+        val foodPrice = ArrayList<Int>()
+        foodPrice.add(10)
+        foodPrice.add(30)
+        foodPrice.add(50)
+        foodPrice.add(20)
+        foodPrice.add(200)
+        foodPrice.add(30)
+
+        val array = resources.obtainTypedArray(R.array.food_image_list)
+        for(i in 0 until array.length()) {
+            var photo: Int = array.getResourceId(i, 0)
+            var name: String = foodName[i]
+            var price: Int = foodPrice[i]
+
+            foodItems.add(FoodItem(photo, name, count = 0, price))
+        }
+
+        showToast("FoodItem count${foodItems.count()}")
     }
 
     private fun showToast(text: String) =

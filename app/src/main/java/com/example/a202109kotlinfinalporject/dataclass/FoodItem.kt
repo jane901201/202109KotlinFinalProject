@@ -4,6 +4,6 @@ package com.example.a202109kotlinfinalporject.dataclass
 data class FoodItem (
     val photo: Int, //圖片
     val name: String, //名稱
-    val count: Int,
+    var count: Int,
     val price: Int //價格
 )
