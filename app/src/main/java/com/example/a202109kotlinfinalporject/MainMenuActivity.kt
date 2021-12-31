@@ -12,14 +12,9 @@ import androidx.activity.result.contract.ActivityResultContracts
 
 class MainMenuActivity : AppCompatActivity() {
 
-    private var userName: String = ""
-    private var pet: String = ""
-    private var coin: Int = 0
-
-
     private lateinit var sqlLiteDatabase: SQLiteDatabase
     private var foodItems: ArrayList<FoodItem> = ArrayList()
-    private var userData: UserData = UserData("", "", 999)//TODO:Test coin
+    private var userData: UserData = UserData("", "", 999, 0)//TODO:Test coin
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
