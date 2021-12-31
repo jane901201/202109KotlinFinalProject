@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.*
+import androidx.core.view.get
 import com.example.a202109kotlinfinalporject.MyAdapter
 import com.example.a202109kotlinfinalporject.R
 import com.example.a202109kotlinfinalporject.dataclass.FoodItem
@@ -13,6 +14,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
 
     private var foodItems: ArrayList<FoodItem> = ArrayList()
     private lateinit var foodItemCounts: IntArray
+    private var coin: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,6 +24,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
 
         intent?.extras?.let{
             petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
+            coin = it.getInt("coin")
             foodItemCounts = it.getIntArray("foodItemsArray")!!
             Log.i("PetFoodStoreActivity", foodItemCounts.size.toString())
         }
@@ -33,29 +36,20 @@ class PetFoodStoreActivity : AppCompatActivity() {
     private fun setGridView() {
         //將變數與 XML 元件綁定
         val gridView = findViewById<GridView>(R.id.storeFoodGridView)
-        val count = ArrayList<String>() //儲存購買數量資訊
-        val item = ArrayList<FoodItem>() //TODO:Temp
 
-
-        //val priceRange = IntRange(10, 100) //建立價格範圍
-        /*val array =
-            resources.obtainTypedArray(R.array.food_image_list) //從 R 類別讀取圖檔
-        for(i in 0 until array.length()) {
-            val photo = array.getResourceId(i,0) //水果圖片 Id
-            val name = "Test" //TODO:水果名稱
-            val price = priceRange.random() //亂數產生價格
-            count.add("${i+1}個") //新增可購買數量資訊
-            item.add(FoodItem(photo, name, foodItemCounts[i] ,price)) //新增水果資訊
-        }*/
-        //array.recycle() //釋放圖檔資源
         //設定橫向顯示列數
         gridView.numColumns = 2
-        //建立 MyAdapter 物件，並傳入 adapter_vertical 作為畫面
-        //gridView.adapter = MyAdapter(this, item, R.layout.store_food_layout)
         gridView.adapter = MyAdapter(this, foodItems, R.layout.store_food_layout)
-        //建立 MyAdapter 物件，並傳入 adapter_horizontal 作為畫面
+        //建立 MyAdapter 物件，並傳入 store_food_layout 作為畫面
 
-        gridView.onItemClickListener
+        gridView.onItemClickListener =
+            AdapterView.OnItemClickListener { parent, view, position, id ->
+                val selectedItemText: FoodItem = parent.getItemAtPosition(position) as FoodItem
+                val selectedItem = view.findViewById<TextView>(R.id.foodCountTextView)
+                Log.i("PetFoodStoreActivity", selectedItemText.name)
+                cost(selectedItemText.price)
+                addCount(selectedItemText.name, selectedItem)
+            }
     }
 
     private fun setFoodItem() {
@@ -86,6 +80,22 @@ class PetFoodStoreActivity : AppCompatActivity() {
         array.recycle()
     }
 
+    private fun cost(price: Int) {
+        var petStoreCoin = findViewById<TextView>(R.id.petStorePetCoinTextView)
+        coin -= price
+        petStoreCoin.text = coin.toString()
+    }
+
+    private fun addCount(name: String, textView: TextView) {
+        for(i in 0..(foodItemCounts.size - 1)) {
+            if(foodItems[i].name == name) {
+                foodItemCounts[i]++
+                foodItems[i].count++
+                textView.text = foodItems[i].count.toString()
+                break
+            }
+        }
+    }
 
     private fun setListener() {
         setReturnButton()
@@ -97,7 +107,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
         returnButton.setOnClickListener {
             val bundle = Bundle()
 
-            bundle.putInt("coin", 88)
+            bundle.putInt("coin", coin)
 
             setResult(RESULT_OK, Intent().putExtras(bundle))
             finish()
