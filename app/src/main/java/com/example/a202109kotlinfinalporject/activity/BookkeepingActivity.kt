@@ -50,7 +50,8 @@ class BookkeepingActivity : AppCompatActivity() {
         var returnButton = findViewById<Button>(R.id.bookkeepingReturnButton)
 
         returnButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+            //startActivity(Intent(this, MainMenuActivity::class.java))
         }
     }
 }

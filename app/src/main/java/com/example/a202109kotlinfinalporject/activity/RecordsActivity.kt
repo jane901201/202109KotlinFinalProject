@@ -35,7 +35,8 @@ class RecordsActivity : AppCompatActivity() {
         var returnButton = findViewById<Button>(R.id.recordsReturnButton)
 
         returnButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            //startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
         }
     }
 }

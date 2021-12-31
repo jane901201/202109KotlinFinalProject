@@ -57,7 +57,8 @@ class FeedPetActivity : AppCompatActivity() {
         var returnButton = findViewById<Button>(R.id.feedPetReturnButton)
 
         returnButton.setOnClickListener {
-            startActivity(Intent(this, MainMenuActivity::class.java))
+            finish()
+            //startActivity(Intent(this, MainMenuActivity::class.java))
         }
     }
 }

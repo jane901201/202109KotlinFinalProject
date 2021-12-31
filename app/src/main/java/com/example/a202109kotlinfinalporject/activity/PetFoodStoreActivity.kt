@@ -46,9 +46,12 @@ class PetFoodStoreActivity : AppCompatActivity() {
             AdapterView.OnItemClickListener { parent, view, position, id ->
                 val selectedItemText: FoodItem = parent.getItemAtPosition(position) as FoodItem
                 val selectedItem = view.findViewById<TextView>(R.id.foodCountTextView)
-                Log.i("PetFoodStoreActivity", selectedItemText.name)
-                cost(selectedItemText.price)
-                addCount(selectedItemText.name, selectedItem)
+                if(coin > 0 && coin >= selectedItemText.price) {
+                    Log.i("PetFoodStoreActivity", selectedItemText.name)
+                    cost(selectedItemText.price)
+                    addCount(selectedItemText.name, selectedItem)
+                }
+                else showToast("沒有足夠的金錢")
             }
     }
 
@@ -113,4 +116,8 @@ class PetFoodStoreActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun showToast(text: String) =
+        Toast.makeText(this,text, Toast.LENGTH_LONG).show()
+
 }
