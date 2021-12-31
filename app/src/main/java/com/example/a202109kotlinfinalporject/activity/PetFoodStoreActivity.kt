@@ -16,6 +16,13 @@ class PetFoodStoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pet_food_store)
 
+        val petCoin = findViewById<TextView>(R.id.petStorePetCoinTextView)
+
+        //intent?.extras?.let{
+        //    petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
+        //}
+
+
         setListener()
         //TODO:setGridView()
 

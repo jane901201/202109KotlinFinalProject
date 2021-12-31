@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.a202109kotlinfinalporject.MyDBHelper
 import com.example.a202109kotlinfinalporject.R
@@ -31,7 +32,11 @@ class MainMenuActivity : AppCompatActivity() {
         if(foodItems.count() == 0) setFoodItem()
         setSQL()
         if(userData.name == "" && userData.pet == "") registerUserNameAndChoosePet()
+        val storeRegister = storeRegister()
+        setStoreButton(storeRegister)
+
         setListener()
+
 
     }
 
@@ -66,16 +71,15 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, RecordsActivity::class.java))
         }
 
-        setStoreButton()
         setPetButton()
     }
 
-    private fun setStoreButton() {
+    private fun setStoreButton(storeRegister: ActivityResultLauncher<Intent>) {
         val storeButton = findViewById<ImageButton>(R.id.openStoreImageButton)
 
         storeButton.setOnClickListener {
             showToast("storeButton")
-            val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            /*val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 if(it.resultCode == Activity.RESULT_OK){
                     //讀取並顯示寵物選擇頁返回的資料
                     userData.coin = it.data?.getIntExtra("coin", 0)!! //TODO:May have problem
@@ -86,24 +90,24 @@ class MainMenuActivity : AppCompatActivity() {
                         Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
                     }
                 }
-            }
+            }*/
 
             val bundle = Bundle()
-            var foodItemCounts = IntArray(6)
+            /*var foodItemCounts = IntArray(6)
             for(i in 0..foodItems.count()) {
                 var foodCount: String = "foodCount$i"
                 foodItemCounts[i] = foodItems[i].count
 
                 Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
-            }
+            }*/
 
             //bundle.putParcelable("foodItems", foodItems)
-            bundle.putIntArray("foodItemsArray", foodItemCounts)
-
+            //bundle.putIntArray("foodItemsArray", foodItemCounts)
+            bundle.putInt("coin", userData.coin)
 
             val intent = Intent( this, PetFoodStoreActivity::class.java)
-            intent.putExtras(bundle)
-            register.launch(intent)
+            //intent.putExtras(bundle)
+            storeRegister.launch(intent)
         }
     }
 
@@ -114,6 +118,23 @@ class MainMenuActivity : AppCompatActivity() {
             showToast("petButton")
             startActivity(Intent(this, FeedPetActivity::class.java))
         }
+    }
+
+    private fun storeRegister(): ActivityResultLauncher<Intent> {
+        val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if(it.resultCode == Activity.RESULT_OK){
+                //讀取並顯示寵物選擇頁返回的資料
+                userData.coin = it.data?.getIntExtra("coin", 0)!! //TODO:May have problem
+                findViewById<TextView>(R.id.petCoinTextView).text= userData.coin.toString()
+                for(i in 0..foodItems.count()) {
+                    var foodCount: String = "foodCount$i"
+                    foodItems[i].count = it.data?.getIntExtra(foodCount, 0)!!
+                    Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
+                }
+            }
+        }
+
+        return storeRegister
     }
 
     private fun registerUserNameAndChoosePet() {
