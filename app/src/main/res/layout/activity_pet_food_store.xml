@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FAF0BF"
     tools:context=".activity.PetFoodStoreActivity">
 
     <TextView
@@ -31,8 +32,9 @@
         android:id="@+id/storeFoodGridView"
         android:layout_width="409dp"
         android:layout_height="663dp"
-        android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/petStorePetCoinTextView" />
 

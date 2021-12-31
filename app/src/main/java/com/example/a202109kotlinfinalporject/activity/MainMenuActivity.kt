@@ -30,11 +30,11 @@ class MainMenuActivity : AppCompatActivity() {
         sqlLiteDatabase = MyDBHelper(this).writableDatabase
 
         if(foodItems.count() == 0) setFoodItem()
-        setSQL()
+        //setSQL()
         if(userData.name == "" && userData.pet == "") registerUserNameAndChoosePet()
         val storeRegister = storeRegister()
         setStoreButton(storeRegister)
-
+        findViewById<TextView>(R.id.mainMenuPetCoinTextView).text = userData.coin.toString()
         setListener()
 
 
@@ -89,7 +89,7 @@ class MainMenuActivity : AppCompatActivity() {
                 Log.i("MainMenuActivity" ,"$i count ${foodItemCounts[i]}")
             }
 
-            //bundle.putParcelable("foodItems", foodItems)
+            //TODO:bundle.putParcelable("foodItems", foodItems)
             bundle.putIntArray("foodItemsArray", foodItemCounts)
             bundle.putInt("coin", userData.coin)
 
@@ -113,8 +113,8 @@ class MainMenuActivity : AppCompatActivity() {
             if(it.resultCode == Activity.RESULT_OK){
                 //讀取並顯示寵物選擇頁返回的資料
                 userData.coin = it.data?.getIntExtra("coin", 0)!! //TODO:May have problem
-                findViewById<TextView>(R.id.petCoinTextView).text= userData.coin.toString()
-                for(i in 0..foodItems.count()) {
+                findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
+                for(i in 0..(foodItems.count() -1)) {
                     var foodCount: String = "foodCount$i"
                     foodItems[i].count = it.data?.getIntExtra(foodCount, 0)!!
                     Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
@@ -181,6 +181,7 @@ class MainMenuActivity : AppCompatActivity() {
         }
 
         showToast("FoodItem count${foodItems.count()}")
+        array.recycle()
     }
 
     private fun showToast(text: String) =
