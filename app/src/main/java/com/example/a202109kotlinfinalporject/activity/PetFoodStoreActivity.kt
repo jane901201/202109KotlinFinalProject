@@ -3,6 +3,7 @@ package com.example.a202109kotlinfinalporject.activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import com.example.a202109kotlinfinalporject.MyAdapter
 import com.example.a202109kotlinfinalporject.R
@@ -10,7 +11,8 @@ import com.example.a202109kotlinfinalporject.dataclass.FoodItem
 
 class PetFoodStoreActivity : AppCompatActivity() {
 
-    private lateinit var foodItem: FoodItem
+    private var foodItems: ArrayList<FoodItem> = ArrayList()
+    private lateinit var foodItemCounts: IntArray
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +22,8 @@ class PetFoodStoreActivity : AppCompatActivity() {
 
         intent?.extras?.let{
             petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
+            foodItemCounts = it.getIntArray("foodItemsArray")!!
+            Log.i("PetFoodStoreActivity", foodItemCounts.size.toString())
         }
 
 

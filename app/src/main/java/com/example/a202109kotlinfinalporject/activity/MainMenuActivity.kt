@@ -79,30 +79,18 @@ class MainMenuActivity : AppCompatActivity() {
 
         storeButton.setOnClickListener {
             showToast("storeButton")
-            /*val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-                if(it.resultCode == Activity.RESULT_OK){
-                    //讀取並顯示寵物選擇頁返回的資料
-                    userData.coin = it.data?.getIntExtra("coin", 0)!! //TODO:May have problem
-                    findViewById<TextView>(R.id.petCoinTextView).text= userData.coin.toString()
-                    for(i in 0..foodItems.count()) {
-                        var foodCount: String = "foodCount$i"
-                        foodItems[i].count = it.data?.getIntExtra(foodCount, 0)!!
-                        Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
-                    }
-                }
-            }*/
 
             val bundle = Bundle()
-            /*var foodItemCounts = IntArray(6)
-            for(i in 0..foodItems.count()) {
-                var foodCount: String = "foodCount$i"
+            var foodItemCounts = IntArray(6)
+            //Log.i("MainMenuActivity", foodItems.count().toString())
+            for(i in 0..(foodItemCounts.size - 1)) {
                 foodItemCounts[i] = foodItems[i].count
-
-                Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
-            }*/
+                //Log.i("MainMenuActivity",foodItems[i].count.toString())
+                Log.i("MainMenuActivity" ,"$i count ${foodItemCounts[i]}")
+            }
 
             //bundle.putParcelable("foodItems", foodItems)
-            //bundle.putIntArray("foodItemsArray", foodItemCounts)
+            bundle.putIntArray("foodItemsArray", foodItemCounts)
             bundle.putInt("coin", userData.coin)
 
             val intent = Intent( this, PetFoodStoreActivity::class.java)
@@ -189,7 +177,7 @@ class MainMenuActivity : AppCompatActivity() {
             var name: String = foodName[i]
             var price: Int = foodPrice[i]
 
-            foodItems.add(FoodItem(photo, name, count = 0, price))
+            foodItems.add(FoodItem(photo, name, 0, price))
         }
 
         showToast("FoodItem count${foodItems.count()}")
