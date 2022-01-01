@@ -60,7 +60,8 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(Intent(this, RecordsActivity::class.java))
         }
 
-        setPetButton()
+        val feedPetRegister = feedPetRegister()
+        setFeedPetButton(feedPetRegister)
     }
 
     private fun setStoreButton(storeRegister: ActivityResultLauncher<Intent>) {
@@ -71,10 +72,8 @@ class MainMenuActivity : AppCompatActivity() {
 
             val bundle = Bundle()
             var foodItemCounts = IntArray(6)
-            //Log.i("MainMenuActivity", foodItems.count().toString())
             for(i in 0..(foodItemCounts.size - 1)) {
                 foodItemCounts[i] = foodItems[i].count
-                //Log.i("MainMenuActivity",foodItems[i].count.toString())
                 Log.i("MainMenuActivity" ,"$i count ${foodItemCounts[i]}")
             }
 
@@ -88,13 +87,46 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
-    private fun setPetButton() {
+    private fun setFeedPetButton(feedPetRegister: ActivityResultLauncher<Intent>) {
         val petButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
 
         petButton.setOnClickListener {
             showToast("petButton")
-            startActivity(Intent(this, FeedPetActivity::class.java))
+            val bundle = Bundle()
+            var foodItemCounts = IntArray(6)
+            for(i in 0..(foodItemCounts.size - 1)) {
+                foodItemCounts[i] = foodItems[i].count
+                Log.i("MainMenuActivity" ,"$i count ${foodItemCounts[i]}")
+            }
+
+            //TODO:bundle.putParcelable("foodItems", foodItems)
+            bundle.putIntArray("foodItemsArray", foodItemCounts)
+            bundle.putString("petName", userData.pet)
+
+            val intent = Intent( this, FeedPetActivity::class.java)
+            intent.putExtras(bundle)
+            feedPetRegister.launch(intent)
         }
+    }
+
+    private fun feedPetRegister(): ActivityResultLauncher<Intent> {
+        val feedPetRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if(it.resultCode == Activity.RESULT_OK){
+                //讀取並顯示寵物選擇頁返回的資料
+                userData.growPoint = it.data?.getIntExtra("growPoint", 0)!!
+                findViewById<TextView>(R.id.mainMenuGrowPointTextView).text = "成長值:${userData.growPoint}"
+                Log.i("MainMenuActivity", userData.growPoint.toString())
+                var foodItemCounts = it.data?.getIntArrayExtra("foodItemCounts")
+                findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
+                for(i in 0..(foodItems.count() -1)) {
+                    var foodCount: String = "foodCount$i"
+                    foodItems[i].count = foodItemCounts?.get(i) ?:
+                            Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
+                }
+            }
+        }
+
+        return feedPetRegister
     }
 
     private fun storeRegister(): ActivityResultLauncher<Intent> {

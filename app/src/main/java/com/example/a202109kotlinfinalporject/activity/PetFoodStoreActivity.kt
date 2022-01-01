@@ -28,6 +28,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
             foodItemCounts = it.getIntArray("foodItemsArray")!!
             Log.i("PetFoodStoreActivity", foodItemCounts.size.toString())
         }
+
         setFoodItem()
         setListener()
         setGridView()
