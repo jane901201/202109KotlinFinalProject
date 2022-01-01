@@ -17,16 +17,12 @@ class MyDBHelper (
     override fun onCreate(db: SQLiteDatabase) {
         //建立 myTable(雖然想用老師的預設名稱，但這個Database不給用阿阿) 資料表，PRIMARY KEY為唯一值，不能重複，就連測試結束都不會消失
         db.execSQL(
-            "CREATE TABLE foodTable(name text NOT NULL, count integer NOT NULL, price integer NOT NULL)"
-        )
-        db.execSQL(
-            "CREATE TABLE recordsTable(name text NOT NULL, count integer NOT NULL, price integer NOT NULL)"
+            "CREATE TABLE recordsTable(costtype text NOT NULL, name text NOT NULL, price integer NOT NULL)"
         )
     }
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int,
                            newVersion: Int) {
         //升級資料庫版本時，刪除舊資料表，並重新執行 onCreate()，建立新資料表
-        db.execSQL("DROP TABLE IF EXISTS foodTable")
         db.execSQL("DROP TABLE IF EXISTS recordsTable")
         onCreate(db)
     }

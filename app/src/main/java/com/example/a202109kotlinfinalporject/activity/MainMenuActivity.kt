@@ -41,21 +41,10 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
-        sqlLiteDatabase.close() //TODO:May have some problem
+        sqlLiteDatabase.close()
         super.onDestroy()
     }
 
-    private fun setSQL() {
-        try {
-            /*sqlLiteDatabase.execSQL(
-                "INSERT INTO FoodTable(name, count, price) VALUES(?, ?, ?)",
-                arrayOf(ed_number.text.toString(),
-                    ed_name.text.toString(), ed_phone.text.toString(), ed_address.text.toString())
-            )*/
-        } catch (e: Exception) {
-            showToast("新增失敗:$e")
-        }
-    }
 
     private fun setListener() {
         val bookKeepingButton = findViewById<ImageButton>(R.id.openBookkeepingImageButton)
@@ -112,11 +101,12 @@ class MainMenuActivity : AppCompatActivity() {
         val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
                 //讀取並顯示寵物選擇頁返回的資料
-                userData.coin = it.data?.getIntExtra("coin", 0)!! //TODO:May have problem
+                userData.coin = it.data?.getIntExtra("coin", 0)!!
+                var foodItemCounts = it.data?.getIntArrayExtra("foodItemCounts")
                 findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
                 for(i in 0..(foodItems.count() -1)) {
                     var foodCount: String = "foodCount$i"
-                    foodItems[i].count = it.data?.getIntExtra(foodCount, 0)!!
+                    foodItems[i].count = foodItemCounts?.get(i) ?:
                     Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
                 }
             }

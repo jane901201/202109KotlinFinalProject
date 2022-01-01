@@ -111,7 +111,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
             val bundle = Bundle()
 
             bundle.putInt("coin", coin)
-
+            bundle.putIntArray("foodItemCounts", foodItemCounts)
             setResult(RESULT_OK, Intent().putExtras(bundle))
             finish()
         }
