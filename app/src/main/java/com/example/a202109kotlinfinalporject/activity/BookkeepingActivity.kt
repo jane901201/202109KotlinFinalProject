@@ -1,6 +1,7 @@
 package com.example.a202109kotlinfinalporject.activity
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
@@ -46,14 +47,13 @@ class BookkeepingActivity : AppCompatActivity() {
         val costEditText = findViewById<EditText>(R.id.CostEditText)
         val recordsNameEditText = findViewById<EditText>(R.id.recordNameEditView)
 
-        if(radioGroup.checkedRadioButtonId == 0) costType = "收入"
-        else if(radioGroup.checkedRadioButtonId == 1)costType = "支出"
+        var  cost = costEditText.text
+        if(radioGroup.checkedRadioButtonId == 2131231244) costType = "收入"
+        else if(radioGroup.checkedRadioButtonId == 2131231243)costType = "支出"
 
         try {
             sqlLiteDatabase.execSQL(
-                "INSERT INTO recordsTable(type, name, price) VALUES(?, ?, ?)",
-                arrayOf(costType,
-                    recordsNameEditText.text.toString(), costEditText.text.toString())
+                "INSERT INTO recordsTable(type, name, price) VALUES('${costType}', '${recordsNameEditText.text}', '${cost}')",
             )
             showToast("新增成功")
         } catch (e: Exception) {
