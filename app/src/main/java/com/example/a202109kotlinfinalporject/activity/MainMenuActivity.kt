@@ -14,12 +14,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import com.example.a202109kotlinfinalporject.MyDBHelper
 import com.example.a202109kotlinfinalporject.R
 import com.example.a202109kotlinfinalporject.dataclass.FoodItem
+import com.example.a202109kotlinfinalporject.dataclass.RecordsData
 import com.example.a202109kotlinfinalporject.dataclass.UserData
 
 class MainMenuActivity : AppCompatActivity() {
 
     private lateinit var sqlLiteDatabase: SQLiteDatabase
     private var foodItems: ArrayList<FoodItem> = ArrayList()
+    private var recordsData:ArrayList<RecordsData> = ArrayList()
     private var userData: UserData = UserData("", "", 999, 0)//TODO:Test coin
 
 
@@ -58,7 +60,30 @@ class MainMenuActivity : AppCompatActivity() {
 
         recordsButton.setOnClickListener {
             showToast("recordsButton")
-            startActivity(Intent(this, RecordsActivity::class.java))
+            var bundle = Bundle()
+
+            var costTypes: ArrayList<String> = ArrayList()
+            var names: ArrayList<String> = ArrayList()
+            var prices = IntArray(recordsData.size)
+            for(i in 0..(recordsData.size - 1)) {
+                costTypes.add(recordsData[i].costType)
+            }
+            for(i in 0..(recordsData.size - 1)) {
+                names.add(recordsData[i].name)
+            }
+            for(i in 0..(recordsData.size - 1)) {
+                prices[i] = recordsData[i].price
+            }
+
+
+            bundle.putStringArrayList("costType", costTypes)
+            bundle.putStringArrayList("name", names)
+            bundle.putIntArray("price", prices)
+
+            val intent = Intent( this, RecordsActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+            //startActivity(Intent(this, RecordsActivity::class.java))
         }
 
         val feedPetRegister = feedPetRegister()
@@ -110,6 +135,24 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
+    private fun storeRegister(): ActivityResultLauncher<Intent> {
+        val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            if(it.resultCode == Activity.RESULT_OK){
+                //讀取並顯示寵物選擇頁返回的資料
+                userData.coin = it.data?.getIntExtra("coin", 0)!!
+                var foodItemCounts = it.data?.getIntArrayExtra("foodItemCounts")
+                findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
+                for(i in 0..(foodItems.count() -1)) {
+                    var foodCount: String = "foodCount$i"
+                    foodItems[i].count = foodItemCounts?.get(i) ?:
+                            Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
+                }
+            }
+        }
+
+        return storeRegister
+    }
+
     private fun feedPetRegister(): ActivityResultLauncher<Intent> {
         val feedPetRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
@@ -129,24 +172,27 @@ class MainMenuActivity : AppCompatActivity() {
 
         return feedPetRegister
     }
-
-    private fun storeRegister(): ActivityResultLauncher<Intent> {
-        val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private fun bookKeepingRegister(): ActivityResultLauncher<Intent> {
+        val bookKeepRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
-                //讀取並顯示寵物選擇頁返回的資料
-                userData.coin = it.data?.getIntExtra("coin", 0)!!
-                var foodItemCounts = it.data?.getIntArrayExtra("foodItemCounts")
-                findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
-                for(i in 0..(foodItems.count() -1)) {
-                    var foodCount: String = "foodCount$i"
-                    foodItems[i].count = foodItemCounts?.get(i) ?:
-                    Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
+                var costTypes: ArrayList<String> = ArrayList()
+                var names: ArrayList<String> = ArrayList()
+                var prices = IntArray(recordsData.size)
+                for(i in 0..(recordsData.size - 1)) {
+                    costTypes.add(recordsData[i].costType)
+                }
+                for(i in 0..(recordsData.size - 1)) {
+                    names.add(recordsData[i].name)
+                }
+                for(i in 0..(recordsData.size - 1)) {
+                    prices[i] = recordsData[i].price
                 }
             }
         }
 
-        return storeRegister
+        return bookKeepRegister
     }
+
 
     private fun registerUserNameAndChoosePet() {
             val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
