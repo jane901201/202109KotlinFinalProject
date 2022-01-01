@@ -36,10 +36,10 @@
         android:id="@+id/feedPetReturnButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="191dp"
+        android:layout_marginStart="292dp"
         android:layout_marginTop="16dp"
         android:text="返回"
-        app:layout_constraintStart_toEndOf="@+id/growPointTextView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
