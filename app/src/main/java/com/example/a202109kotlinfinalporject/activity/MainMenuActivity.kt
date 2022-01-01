@@ -51,41 +51,16 @@ class MainMenuActivity : AppCompatActivity() {
 
     private fun setListener() {
         val bookKeepingButton = findViewById<ImageButton>(R.id.openBookkeepingImageButton)
-        val recordsButton = findViewById<ImageButton>(R.id.openRecordsImageButton)
+        var bookkeepingRegister = bookKeepingRegister()
 
         bookKeepingButton.setOnClickListener {
             showToast("bookKeeping")
-            startActivity(Intent(this, BookkeepingActivity::class.java))
+            val intent = Intent(this, BookkeepingActivity::class.java)
+            bookkeepingRegister.launch(intent)
+            //startActivity(Intent(this, BookkeepingActivity::class.java))
         }
 
-        recordsButton.setOnClickListener {
-            showToast("recordsButton")
-            var bundle = Bundle()
-
-            var costTypes: ArrayList<String> = ArrayList()
-            var names: ArrayList<String> = ArrayList()
-            var prices = IntArray(recordsData.size)
-            for(i in 0..(recordsData.size - 1)) {
-                costTypes.add(recordsData[i].costType)
-            }
-            for(i in 0..(recordsData.size - 1)) {
-                names.add(recordsData[i].name)
-            }
-            for(i in 0..(recordsData.size - 1)) {
-                prices[i] = recordsData[i].price
-            }
-
-
-            bundle.putStringArrayList("costType", costTypes)
-            bundle.putStringArrayList("name", names)
-            bundle.putIntArray("price", prices)
-
-            val intent = Intent( this, RecordsActivity::class.java)
-            intent.putExtras(bundle)
-            startActivity(intent)
-            //startActivity(Intent(this, RecordsActivity::class.java))
-        }
-
+        setRecordsButton()
         val feedPetRegister = feedPetRegister()
         setFeedPetButton(feedPetRegister)
     }
@@ -135,6 +110,37 @@ class MainMenuActivity : AppCompatActivity() {
         }
     }
 
+    private fun setRecordsButton() {
+        val recordsButton = findViewById<ImageButton>(R.id.openRecordsImageButton)
+
+        recordsButton.setOnClickListener {
+            showToast("recordsButton")
+            var bundle = Bundle()
+
+            var costTypes: ArrayList<String> = ArrayList()
+            var names: ArrayList<String> = ArrayList()
+            var prices = IntArray(recordsData.size)
+            for(i in 0..(recordsData.size - 1)) {
+                costTypes.add(recordsData[i].costType)
+            }
+            for(i in 0..(recordsData.size - 1)) {
+                names.add(recordsData[i].name)
+            }
+            for(i in 0..(recordsData.size - 1)) {
+                prices[i] = recordsData[i].price
+            }
+
+
+            bundle.putStringArrayList("costType", costTypes)
+            bundle.putStringArrayList("name", names)
+            bundle.putIntArray("price", prices)
+
+            val intent = Intent( this, RecordsActivity::class.java)
+            intent.putExtras(bundle)
+            startActivity(intent)
+        }
+    }
+
     private fun storeRegister(): ActivityResultLauncher<Intent> {
         val storeRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
@@ -175,18 +181,11 @@ class MainMenuActivity : AppCompatActivity() {
     private fun bookKeepingRegister(): ActivityResultLauncher<Intent> {
         val bookKeepRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
-                var costTypes: ArrayList<String> = ArrayList()
-                var names: ArrayList<String> = ArrayList()
-                var prices = IntArray(recordsData.size)
-                for(i in 0..(recordsData.size - 1)) {
-                    costTypes.add(recordsData[i].costType)
-                }
-                for(i in 0..(recordsData.size - 1)) {
-                    names.add(recordsData[i].name)
-                }
-                for(i in 0..(recordsData.size - 1)) {
-                    prices[i] = recordsData[i].price
-                }
+                val costType: String = it.data?.getStringExtra("costType")!!
+                val name: String = it.data?.getStringExtra("name")!!
+                val price : Int = it.data?.getIntExtra("price", 0)!!
+                recordsData.add(RecordsData(costType, name, price))
+                Log.i("MainMenuActivity", recordsData.count().toString())
             }
         }
 

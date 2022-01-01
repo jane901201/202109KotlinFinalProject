@@ -4,6 +4,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.ListView
@@ -18,6 +19,10 @@ class RecordsActivity : AppCompatActivity() {
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var toastQueryString: String
 
+    private var costTypes: ArrayList<String> = ArrayList()
+    private var names: ArrayList<String> = ArrayList()
+    private lateinit var prices: IntArray
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,6 +32,13 @@ class RecordsActivity : AppCompatActivity() {
         sqLiteDatabase = MyDBHelper(this).writableDatabase
         adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, items)
+
+        intent?.extras?.let{
+            costTypes = it.getStringArrayList("costType") as ArrayList<String>
+            names = it.getStringArrayList("name") as ArrayList<String>
+            prices = it.getIntArray("price")!!
+        }
+
 
         setListener()
 
@@ -39,6 +51,7 @@ class RecordsActivity : AppCompatActivity() {
         val c = sqLiteDatabase.rawQuery(toastQueryString, null)
         c.moveToFirst() //從第一筆開始輸出
         items.clear() //清空舊資料
+        setItems()
         items.add("支出\t\t\t\t\t\t\t\t\t\t\t\t\t\t 名稱1:\t\t\t\t\t\t\t\t\t" +
                 " 1000")//TODO:Test
         items.add("支出\t\t\t\t\t\t\t\t\t\t\t\t\t\t 名稱2:\t\t\t\t\t\t\t\t\t" +
@@ -54,6 +67,13 @@ class RecordsActivity : AppCompatActivity() {
         }*/
         adapter.notifyDataSetChanged() //更新列表資料
         c.close() //關閉 Cursor
+    }
+
+    private fun setItems() {
+        for(i in 0 until names.size) {
+            items.add(":${costTypes[i]}\t\t\t\t\t\t\t\t\t\t\t\t\t\t :${names[i]}\t\t\t\t\t\t\t\t\t" +
+                    " $:${prices[i]}")
+        }
     }
 
 
