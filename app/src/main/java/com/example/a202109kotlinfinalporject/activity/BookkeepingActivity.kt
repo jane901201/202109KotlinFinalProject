@@ -5,6 +5,7 @@ import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.*
 import com.example.a202109kotlinfinalporject.MyDBHelper
 import com.example.a202109kotlinfinalporject.R
@@ -26,49 +27,38 @@ class BookkeepingActivity : AppCompatActivity() {
 
     private fun setListener() {
         setReturnButton()
-        //TODO:setCheckButton()
+        setCheckButton()
     }
 
     private fun setCheckButton() {
         var checkButton = findViewById<Button>(R.id.checkButton)
 
         checkButton.setOnClickListener {
-            //TODO:setSQL()
-            //val radioGroup= findViewById<RadioGroup>(R.id.radioGroup)
-            //val costEditText = findViewById<EditText>(R.id.CostEditText)
-            //val recordsNameEditText = findViewById<EditText>(R.id.recordNameEditView)
+            setSQL()
 
-            //將飲料名稱、甜度、冰塊放入Bundle
-           //val b = Bundle()
-
-            //b.putString("cost", costEditText.text.toString())
-            //b.putString("record_name", recordsNameEditText.text.toString())
-            //b.putString("cost_type", radioGroup.findViewById<RadioButton>(radioGroup.checkedRadioButtonId).text.toString())
-
-            //透過setResult將資料回傳
-            //setResult(Activity.RESULT_OK, Intent().putExtras(b))
-            //結束Main3Activity
             finish()
-
-
         }
     }
 
     private fun setSQL() {
         val radioGroup= findViewById<RadioGroup>(R.id.radioGroup)
-        val selectedRadioButton = findViewById<RadioButton>(radioGroup.checkedRadioButtonId)
+        var costType: String = ""
         val costEditText = findViewById<EditText>(R.id.CostEditText)
         val recordsNameEditText = findViewById<EditText>(R.id.recordNameEditView)
 
+        if(radioGroup.checkedRadioButtonId == 0) costType = "收入"
+        else if(radioGroup.checkedRadioButtonId == 1)costType = "支出"
 
         try {
             sqlLiteDatabase.execSQL(
-                "INSERT INTO recordsTable(costtype, name, price) VALUES(?, ?, ?)",
-                arrayOf(selectedRadioButton.text.toString(),
+                "INSERT INTO recordsTable(type, name, price) VALUES(?, ?, ?)",
+                arrayOf(costType,
                     recordsNameEditText.text.toString(), costEditText.text.toString())
             )
+            showToast("新增成功")
         } catch (e: Exception) {
             showToast("新增失敗:$e")
+            Log.i("BookkeepingActivity" ,e.toString())
         }
     }
 

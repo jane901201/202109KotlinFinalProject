@@ -73,6 +73,7 @@
             android:id="@+id/expenseRadioButton"
             android:layout_width="159dp"
             android:layout_height="wrap_content"
+            android:checked="true"
             android:text="支出" />
     </RadioGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
