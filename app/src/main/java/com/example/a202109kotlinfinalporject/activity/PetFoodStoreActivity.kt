@@ -26,7 +26,6 @@ class PetFoodStoreActivity : AppCompatActivity() {
             petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
             coin = it.getInt("coin")
             foodItemCounts = it.getIntArray("foodItemsArray")!!
-            Log.i("PetFoodStoreActivity", foodItemCounts.size.toString())
         }
 
         setFoodItem()
@@ -48,7 +47,6 @@ class PetFoodStoreActivity : AppCompatActivity() {
                 val selectedItemText: FoodItem = parent.getItemAtPosition(position) as FoodItem
                 val selectedItem = view.findViewById<TextView>(R.id.foodCountTextView)
                 if(coin > 0 && coin >= selectedItemText.price) {
-                    Log.i("PetFoodStoreActivity", selectedItemText.name)
                     cost(selectedItemText.price)
                     addCount(selectedItemText.name, selectedItem)
                 }
@@ -87,7 +85,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
     private fun cost(price: Int) {
         var petStoreCoin = findViewById<TextView>(R.id.petStorePetCoinTextView)
         coin -= price
-        petStoreCoin.text = coin.toString()
+        petStoreCoin.text = "寵物幣:${coin}"
     }
 
     private fun addCount(name: String, textView: TextView) {
@@ -95,7 +93,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
             if(foodItems[i].name == name) {
                 foodItemCounts[i]++
                 foodItems[i].count++
-                textView.text = foodItems[i].count.toString()
+                textView.text = "數量:${foodItems[i].count.toString()}"
                 break
             }
         }

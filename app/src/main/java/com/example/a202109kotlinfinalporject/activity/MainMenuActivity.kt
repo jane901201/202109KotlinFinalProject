@@ -2,7 +2,6 @@ package com.example.a202109kotlinfinalporject.activity
 
 import android.app.Activity
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -11,7 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import com.example.a202109kotlinfinalporject.MyDBHelper
+import androidx.appcompat.app.AlertDialog
 import com.example.a202109kotlinfinalporject.R
 import com.example.a202109kotlinfinalporject.dataclass.FoodItem
 import com.example.a202109kotlinfinalporject.dataclass.RecordsData
@@ -19,7 +18,6 @@ import com.example.a202109kotlinfinalporject.dataclass.UserData
 
 class MainMenuActivity : AppCompatActivity() {
 
-    private lateinit var sqlLiteDatabase: SQLiteDatabase
     private var foodItems: ArrayList<FoodItem> = ArrayList()
     private var recordsData:ArrayList<RecordsData> = ArrayList()
     private var userData: UserData = UserData("", "", 999, 0)//TODO:Test coin
@@ -29,25 +27,13 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_mainmenu)
 
-        sqlLiteDatabase = MyDBHelper(this).writableDatabase
-
         if(foodItems.count() == 0) setFoodItem()
-        //setSQL()
         if(userData.name == "" && userData.pet == "") registerUserNameAndChoosePet()
         val storeRegister = storeRegister()
         setStoreButton(storeRegister)
-        findViewById<TextView>(R.id.mainMenuPetCoinTextView).text = userData.coin.toString()
+        setPetCoinTextView(userData.coin)
         setListener()
-
-
     }
-
-    override fun onDestroy() {
-        sqlLiteDatabase.execSQL("DROP TABLE if exists recordsTable")
-        sqlLiteDatabase.close()
-        super.onDestroy()
-    }
-
 
     private fun setListener() {
         val bookKeepingButton = findViewById<ImageButton>(R.id.openBookkeepingImageButton)
@@ -57,12 +43,15 @@ class MainMenuActivity : AppCompatActivity() {
             showToast("bookKeeping")
             val intent = Intent(this, BookkeepingActivity::class.java)
             bookkeepingRegister.launch(intent)
-            //startActivity(Intent(this, BookkeepingActivity::class.java))
         }
 
         setRecordsButton()
         val feedPetRegister = feedPetRegister()
         setFeedPetButton(feedPetRegister)
+    }
+
+    private fun setPetCoinTextView(coin: Int) {
+        findViewById<TextView>(R.id.mainMenuPetCoinTextView).text = "寵物幣:${coin}"
     }
 
     private fun setStoreButton(storeRegister: ActivityResultLauncher<Intent>) {
@@ -75,10 +64,8 @@ class MainMenuActivity : AppCompatActivity() {
             var foodItemCounts = IntArray(6)
             for(i in 0..(foodItemCounts.size - 1)) {
                 foodItemCounts[i] = foodItems[i].count
-                Log.i("MainMenuActivity" ,"$i count ${foodItemCounts[i]}")
             }
 
-            //TODO:bundle.putParcelable("foodItems", foodItems)
             bundle.putIntArray("foodItemsArray", foodItemCounts)
             bundle.putInt("coin", userData.coin)
 
@@ -100,7 +87,6 @@ class MainMenuActivity : AppCompatActivity() {
                 Log.i("MainMenuActivity" ,"$i count ${foodItemCounts[i]}")
             }
 
-            //TODO:bundle.putParcelable("foodItems", foodItems)
             bundle.putIntArray("foodItemsArray", foodItemCounts)
             bundle.putString("petName", userData.pet)
 
@@ -120,15 +106,11 @@ class MainMenuActivity : AppCompatActivity() {
             var costTypes: ArrayList<String> = ArrayList()
             var names: ArrayList<String> = ArrayList()
             var prices = IntArray(recordsData.size)
-            for(i in 0..(recordsData.size - 1)) {
-                costTypes.add(recordsData[i].costType)
-            }
-            for(i in 0..(recordsData.size - 1)) {
-                names.add(recordsData[i].name)
-            }
-            for(i in 0..(recordsData.size - 1)) {
-                prices[i] = recordsData[i].price
-            }
+            for(i in 0 until recordsData.size) costTypes.add(recordsData[i].costType)
+
+            for(i in 0 until recordsData.size) names.add(recordsData[i].name)
+
+            for(i in 0 until  recordsData.size) prices[i] = recordsData[i].price
 
 
             bundle.putStringArrayList("costType", costTypes)
@@ -147,7 +129,7 @@ class MainMenuActivity : AppCompatActivity() {
                 //讀取並顯示寵物選擇頁返回的資料
                 userData.coin = it.data?.getIntExtra("coin", 0)!!
                 var foodItemCounts = it.data?.getIntArrayExtra("foodItemCounts")
-                findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
+                setPetCoinTextView(userData.coin)
                 for(i in 0..(foodItems.count() -1)) {
                     var foodCount: String = "foodCount$i"
                     foodItems[i].count = foodItemCounts?.get(i) ?:
@@ -162,12 +144,11 @@ class MainMenuActivity : AppCompatActivity() {
     private fun feedPetRegister(): ActivityResultLauncher<Intent> {
         val feedPetRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
-                //讀取並顯示寵物選擇頁返回的資料
                 userData.growPoint = it.data?.getIntExtra("growPoint", 0)!!
                 findViewById<TextView>(R.id.mainMenuGrowPointTextView).text = "成長值:${userData.growPoint}"
                 Log.i("MainMenuActivity", userData.growPoint.toString())
                 var foodItemCounts = it.data?.getIntArrayExtra("foodItemCounts")
-                findViewById<TextView>(R.id.mainMenuPetCoinTextView).text= userData.coin.toString()
+                setPetCoinTextView(userData.coin)
                 for(i in 0..(foodItems.count() -1)) {
                     var foodCount: String = "foodCount$i"
                     foodItems[i].count = foodItemCounts?.get(i) ?:
@@ -178,13 +159,17 @@ class MainMenuActivity : AppCompatActivity() {
 
         return feedPetRegister
     }
+
     private fun bookKeepingRegister(): ActivityResultLauncher<Intent> {
         val bookKeepRegister = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if(it.resultCode == Activity.RESULT_OK){
                 val costType: String = it.data?.getStringExtra("costType")!!
                 val name: String = it.data?.getStringExtra("name")!!
                 val price : Int = it.data?.getIntExtra("price", 0)!!
+
                 recordsData.add(RecordsData(costType, name, price))
+
+                showCoinAward()
                 Log.i("MainMenuActivity", recordsData.count().toString())
             }
         }
@@ -192,11 +177,9 @@ class MainMenuActivity : AppCompatActivity() {
         return bookKeepRegister
     }
 
-
     private fun registerUserNameAndChoosePet() {
             val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 if(it.resultCode == Activity.RESULT_OK){
-                    //讀取並顯示寵物選擇頁返回的資料
                     findViewById<TextView>(R.id.petNameTextView).text= it.data?.getStringExtra("name")+
                             "的寵物"+it.data?.getStringExtra("pet")
                     userData.name = it.data?.getStringExtra("name").toString()
@@ -252,7 +235,17 @@ class MainMenuActivity : AppCompatActivity() {
         array.recycle()
     }
 
+    private fun showCoinAward() {
+        AlertDialog.Builder(this)
+            .setTitle("記帳獎勵")
+            .setMessage("獲得100寵物幣")
+            .setNeutralButton("確認") { dialog, which ->
+                showToast("獲得100寵物幣")
+                userData.coin += 100
+                setPetCoinTextView(userData.coin)
+            }.show()
+    }
+
     private fun showToast(text: String) =
         Toast.makeText(this,text, Toast.LENGTH_LONG).show()
-
 }

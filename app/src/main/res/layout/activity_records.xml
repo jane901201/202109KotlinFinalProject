@@ -7,23 +7,13 @@
     android:background="#FAF0BF"
     tools:context=".activity.RecordsActivity">
 
-    <ProgressBar
-        android:id="@+id/progressBar3"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Large"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="167dp"
-        android:layout_marginTop="71dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/totalCountTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="45dp"
-        android:text="總收入:999999"
+        android:layout_marginStart="164dp"
+        android:layout_marginTop="64dp"
+        android:text="損益:999999"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,18 +21,18 @@
         android:id="@+id/totalRepenseTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="84dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="44dp"
         android:text="總支出:999999"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/totalRepenseTextView2"
+        android:id="@+id/totalIncomeTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="220dp"
-        android:layout_marginTop="92dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="76dp"
         android:text="總收入:999999"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -61,15 +51,12 @@
         android:id="@+id/linearLayout"
         android:layout_width="398dp"
         android:layout_height="41dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginBottom="203dp"
+        android:layout_marginTop="120dp"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.428"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBar3"
-        app:layout_constraintVertical_bias="0.047">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/textView4"

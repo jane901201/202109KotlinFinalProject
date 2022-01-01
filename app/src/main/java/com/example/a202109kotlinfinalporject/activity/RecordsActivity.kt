@@ -1,21 +1,16 @@
 package com.example.a202109kotlinfinalporject.activity
 
-import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import com.example.a202109kotlinfinalporject.MyDBHelper
 import com.example.a202109kotlinfinalporject.R
 
 class RecordsActivity : AppCompatActivity() {
 
     private var items: ArrayList<String> = ArrayList()
-    private lateinit var sqLiteDatabase: SQLiteDatabase
     private lateinit var adapter: ArrayAdapter<String>
     private lateinit var toastQueryString: String
 
@@ -23,59 +18,78 @@ class RecordsActivity : AppCompatActivity() {
     private var names: ArrayList<String> = ArrayList()
     private lateinit var prices: IntArray
 
+    private var incomeTotal: Int = 0
+    private var repenseTotoal: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_records)
 
+        getIntentData()
+
+        var totalIncomeTextView = findViewById<TextView>(R.id.totalIncomeTextView)
+        var totalRespenseTextView = findViewById<TextView>(R.id.totalRepenseTextView)
+        var totalCountTextView = findViewById<TextView>(R.id.totalCountTextView)
+
+
+
         val listView = findViewById<ListView>(R.id.recordsListView)
-        sqLiteDatabase = MyDBHelper(this).writableDatabase
         adapter = ArrayAdapter(this,
             android.R.layout.simple_list_item_1, items)
 
+        setIncomeTotal()
+        setRepenseTotal()
+
+        totalIncomeTextView.text = "總收入:${incomeTotal}"
+        totalRespenseTextView.text = "總支出:${repenseTotoal}"
+        totalCountTextView.text = "損益:${getTotalCount()}"
+
+        setListener()
+        getItem()
+        listView.adapter = adapter
+    }
+
+    private fun setIncomeTotal() {
+        for(i in 0 until prices.size) {
+            if(costTypes[i] == "收入") incomeTotal += prices[i]
+        }
+
+        Log.i("RecordsActivity", "$incomeTotal")
+    }
+
+    private fun setRepenseTotal() {
+
+        for(i in 0 until prices.size) {
+            //Log.i("RecordsActivity", (names[i] == "支出").toString())
+            if(costTypes[i] == "支出") repenseTotoal += prices[i]
+        }
+        Log.i("RecordsActivity", "$repenseTotoal")
+    }
+
+    private fun getTotalCount(): Int {
+        return incomeTotal - repenseTotoal
+    }
+
+    private fun getIntentData() {
         intent?.extras?.let{
             costTypes = it.getStringArrayList("costType") as ArrayList<String>
             names = it.getStringArrayList("name") as ArrayList<String>
             prices = it.getIntArray("price")!!
         }
-
-
-        setListener()
-
-        getSQLData()
-        listView.adapter = adapter
     }
 
-    private fun getSQLData() {
-        toastQueryString = "select * from recordsTable"
-        val c = sqLiteDatabase.rawQuery(toastQueryString, null)
-        c.moveToFirst() //從第一筆開始輸出
-        items.clear() //清空舊資料
+    private fun getItem() {
+        items.clear()
         setItems()
-        items.add("支出\t\t\t\t\t\t\t\t\t\t\t\t\t\t 名稱1:\t\t\t\t\t\t\t\t\t" +
-                " 1000")//TODO:Test
-        items.add("支出\t\t\t\t\t\t\t\t\t\t\t\t\t\t 名稱2:\t\t\t\t\t\t\t\t\t" +
-                " 1000")//TODO:Test
-        items.add("支出\t\t\t\t\t\t\t\t\t\t\t\t\t\t 名稱3:\t\t\t\t\t\t\t\t\t" +
-                " 1000")//TODO:Test
-        showToast("共有${c.count}筆資料")
-        /*TODO:for (i in 0 until c.count) {
-            //加入新資料
-            items.add(":${c.getString(1)}\t\t\t\t\t\t\t\t\t\t\t\t\t\t :${c.getString(2)}\t\t\t\t\t\t\t\t\t" +
-                    " $:${c.getInt(3)}")
-            c.moveToNext() //移動到下一筆
-        }*/
-        adapter.notifyDataSetChanged() //更新列表資料
-        c.close() //關閉 Cursor
+        adapter.notifyDataSetChanged()
     }
 
     private fun setItems() {
         for(i in 0 until names.size) {
-            items.add(":${costTypes[i]}\t\t\t\t\t\t\t\t\t\t\t\t\t\t :${names[i]}\t\t\t\t\t\t\t\t\t" +
-                    " $:${prices[i]}")
+            items.add("${costTypes[i]}\t\t\t\t\t\t\t\t\t\t\t\t\t\t ${names[i]}\t\t\t\t\t\t\t\t\t" +
+                    " ${prices[i]}元")
         }
     }
-
 
     private fun setListener() {
         setReturnButton()

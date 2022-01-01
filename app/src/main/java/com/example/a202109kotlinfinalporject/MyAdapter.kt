@@ -25,11 +25,11 @@ class MyAdapter(context: Context, data: ArrayList<FoodItem>, private val layout:
         val foodCountTextView = view.findViewById<TextView>(R.id.foodCountTextView)
 
         foodNameTextView.text = item.name
-        foodCountTextView.text = item.count.toString()
+        foodCountTextView.text = "數量:${item.count.toString()}"
         if(layout == R.layout.store_food_layout) {
             val foodCostTextView = view.findViewById<TextView>(R.id.foodCostTextView)
 
-            foodCostTextView.text = item.price.toString()
+            foodCostTextView.text = "價格:${item.price.toString()}"
         }
         //回傳此項目的畫面
         return view

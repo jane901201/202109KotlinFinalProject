@@ -18,7 +18,10 @@ class FeedPetActivity : AppCompatActivity() {
     private var foodItems: ArrayList<FoodItem> = ArrayList()
     private lateinit var foodItemCounts: IntArray
     private var eggLove = arrayOf(0, 1)
+    private var boxLove = arrayOf(2, 3)
+    private var stoneLove = arrayOf(4, 5)
     private val fullGrowPoint = 50
+    private var isFullGrowPoint: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,18 +35,15 @@ class FeedPetActivity : AppCompatActivity() {
             growPoint = it.getInt("growPoint")
             foodItemCounts = it.getIntArray("foodItemsArray")!!
             petName = it.getString("petName").toString()
-            Log.i("FeedPetActivity", petName)
-            Log.i("FeedPetActivity", foodItemCounts.size.toString())
         }
 
-
+        setPetImage()
         setFoodItem()
         setListener()
         setGridView()
     }
 
     private fun setGridView() {
-        //將變數與 XML 元件綁定
         val gridView = findViewById<GridView>(R.id.feedPetGridView)
 
         gridView.numColumns = 3
@@ -53,9 +53,10 @@ class FeedPetActivity : AppCompatActivity() {
         AdapterView.OnItemClickListener { parent, view, position, id ->
             val selectedItemText: FoodItem = parent.getItemAtPosition(position) as FoodItem
             val selectedItem = view.findViewById<TextView>(R.id.foodCountTextView)
+            Log.i("FeedPetActivity", "selectId ${id}")
             if(selectedItemText.count > 0) {
-                Log.i("FeedPetActivity", selectedItemText.name)
-                addGrowPoint()
+                var tmpId: Int = id.toInt()
+                addGrowPoint(tmpId)
                 decreaseCount(selectedItemText.name, selectedItem)
                 isFullGrowPoint()
             }
@@ -64,7 +65,7 @@ class FeedPetActivity : AppCompatActivity() {
     }
 
     private fun isFullGrowPoint() {
-        if(growPoint == fullGrowPoint) showToast("Is full growPoint")
+        if(growPoint >= fullGrowPoint) showToast("Is full growPoint")
     }
 
 
@@ -101,17 +102,38 @@ class FeedPetActivity : AppCompatActivity() {
             if (foodItems[i].name == name) {
                 foodItemCounts[i]--
                 foodItems[i].count--
-                textView.text = foodItems[i].count.toString()
+                textView.text = "數量:${foodItems[i].count.toString()}"
                 break
             }
         }
     }
 
-    private fun addGrowPoint() {
-        growPoint += 40;
+    private fun setPetImage() {
+        val petImageButton = findViewById<ImageButton>(R.id.petButton)
+
+        if(isFullGrowPoint) {
+
+        }else {
+            if(petName == "箱子") {
+                petImageButton.setImageResource(R.drawable.box)
+            }else if(petName == "蛋") {
+                petImageButton.setImageResource(R.drawable.egg)
+            }else if(petName == "石頭") {
+                petImageButton.setImageResource(R.drawable.stone)
+            }
+        }
+    }
+
+
+    private fun addGrowPoint(id: Int) {
+        if((petName == "蛋" && eggLove.contains(id)) ||
+            (petName == "箱子" && boxLove.contains(id)) ||
+            (petName == "石頭" && stoneLove.contains(id)))
+            growPoint += 40
+        else
+            growPoint+= 20
         var growPointTextView = findViewById<TextView>(R.id.growPointTextView)
         growPointTextView.text = "成長值:${growPoint}"
-        //TODO:if like, add 40, no 20
     }
 
     private fun setListener() {
