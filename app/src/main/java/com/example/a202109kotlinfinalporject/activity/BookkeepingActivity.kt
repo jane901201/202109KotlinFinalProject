@@ -52,9 +52,13 @@ class BookkeepingActivity : AppCompatActivity() {
         else if(radioGroup.checkedRadioButtonId == 2131231243)costType = "支出"
 
         try {
+            //sqlLiteDatabase.execSQL("INSERT INTO recordsTable(name, price) VALUES('${recordsNameEditText.text}', '${cost}')")
             sqlLiteDatabase.execSQL(
-                "INSERT INTO recordsTable(type, name, price) VALUES('${costType}', '${recordsNameEditText.text}', '${cost}')",
+                "INSERT INTO recordsTable(name, price) VALUES(?, ?)",
+                arrayOf(recordsNameEditText.text,
+                    cost)
             )
+
             showToast("新增成功")
         } catch (e: Exception) {
             showToast("新增失敗:$e")

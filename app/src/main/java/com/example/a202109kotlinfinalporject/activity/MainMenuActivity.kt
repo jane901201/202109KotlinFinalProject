@@ -41,6 +41,7 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        sqlLiteDatabase.execSQL("DROP TABLE if exists recordsTable")
         sqlLiteDatabase.close()
         super.onDestroy()
     }
