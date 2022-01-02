@@ -24,7 +24,7 @@ class BookkeepingActivity : AppCompatActivity() {
     }
 
     private fun setCheckButton() {
-        var checkButton = findViewById<Button>(R.id.checkButton)
+        var checkButton = findViewById<ImageButton>(R.id.checkImageButton)
 
 
         checkButton.setOnClickListener {
@@ -49,7 +49,7 @@ class BookkeepingActivity : AppCompatActivity() {
 
 
     private fun setReturnButton() {
-        var returnButton = findViewById<Button>(R.id.bookkeepingReturnButton)
+        var returnButton = findViewById<ImageButton>(R.id.bookkeepingReturnImageButton)
 
         returnButton.setOnClickListener {
             finish()

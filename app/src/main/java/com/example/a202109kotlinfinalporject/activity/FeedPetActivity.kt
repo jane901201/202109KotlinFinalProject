@@ -8,7 +8,6 @@ import android.widget.*
 import com.example.a202109kotlinfinalporject.MyAdapter
 import com.example.a202109kotlinfinalporject.R
 import com.example.a202109kotlinfinalporject.dataclass.FoodItem
-import org.w3c.dom.Text
 
 class FeedPetActivity : AppCompatActivity() {
 
@@ -20,8 +19,8 @@ class FeedPetActivity : AppCompatActivity() {
     private var eggLove = arrayOf(0, 1)
     private var boxLove = arrayOf(2, 3)
     private var stoneLove = arrayOf(4, 5)
-    private val fullGrowPoint = 50
-    private var isFullGrowPoint: Boolean = false
+    private val stage2GrowPoint = 50
+    private val stage3GrowPoint = 100
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,6 +34,7 @@ class FeedPetActivity : AppCompatActivity() {
             growPoint = it.getInt("growPoint")
             foodItemCounts = it.getIntArray("foodItemsArray")!!
             petName = it.getString("petName").toString()
+            setPetImage()
         }
 
         setPetImage()
@@ -58,15 +58,27 @@ class FeedPetActivity : AppCompatActivity() {
                 var tmpId: Int = id.toInt()
                 addGrowPoint(tmpId)
                 decreaseCount(selectedItemText.name, selectedItem)
-                isFullGrowPoint()
+                checkGrowPoint()
             }
             else showToast("沒有更多的食物了")
         }
     }
 
-    private fun isFullGrowPoint() {
-        if(growPoint >= fullGrowPoint) showToast("Is full growPoint")
+    private fun checkGrowPoint() {
+        if(isFullStage2GrowPoint()) setPetImage()
+        else if(isFullStage3GrowPoint()) setPetImage()
     }
+
+    private fun isFullStage2GrowPoint(): Boolean {
+        if(growPoint in stage2GrowPoint..stage3GrowPoint) return true
+        return false
+    }
+
+    private fun isFullStage3GrowPoint(): Boolean {
+        if(growPoint >= stage3GrowPoint) return true
+        return false
+    }
+
 
 
     private fun setFoodItem() {
@@ -109,11 +121,25 @@ class FeedPetActivity : AppCompatActivity() {
     }
 
     private fun setPetImage() {
-        val petImageButton = findViewById<ImageButton>(R.id.petButton)
+        val petImageButton = findViewById<ImageButton>(R.id.petImageButton)
 
-        if(isFullGrowPoint) {
-
-        }else {
+        if(isFullStage3GrowPoint()) {
+            if(petName == "箱子") {
+                petImageButton.setImageResource(R.drawable.box_stage3_the_great_wall)
+            }else if(petName == "蛋") {
+                petImageButton.setImageResource(R.drawable.egg_stage3_omurice)
+            }else if(petName == "石頭") {
+                petImageButton.setImageResource(R.drawable.stone_stage3_diamond)
+            }
+        }else if(isFullStage2GrowPoint()) {
+            if(petName == "箱子") {
+                petImageButton.setImageResource(R.drawable.box_stage2_cardboard)
+            }else if(petName == "蛋") {
+                petImageButton.setImageResource(R.drawable.egg_stage2_sunny_side_up_egg)
+            }else if(petName == "石頭") {
+                petImageButton.setImageResource(R.drawable.stone_stage2_ore)
+            }
+        } else {
             if(petName == "箱子") {
                 petImageButton.setImageResource(R.drawable.box)
             }else if(petName == "蛋") {
@@ -141,7 +167,7 @@ class FeedPetActivity : AppCompatActivity() {
     }
 
     private fun setReturnButton() {
-        var returnButton = findViewById<Button>(R.id.feedPetReturnButton)
+        var returnButton = findViewById<ImageButton>(R.id.feedPetReturnImageButton)
 
         returnButton.setOnClickListener {
             val bundle = Bundle()

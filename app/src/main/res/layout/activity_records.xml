@@ -7,45 +7,18 @@
     android:background="#FAF0BF"
     tools:context=".activity.RecordsActivity">
 
-    <TextView
-        android:id="@+id/totalCountTextView"
-        android:layout_width="120dp"
-        android:layout_height="20dp"
-        android:layout_marginStart="144dp"
-        android:layout_marginTop="60dp"
-        android:text="損益:999999"
+    <ImageButton
+        android:id="@+id/recordsReturnImageButton"
+        android:layout_width="66dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="344dp"
+        android:layout_marginTop="4dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/totalRepenseTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="44dp"
-        android:text="總支出:999999"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/totalIncomeTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="76dp"
-        android:text="總收入:999999"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/recordsReturnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="300dp"
-        android:layout_marginTop="16dp"
-        android:text="退出"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/return_button"
+        tools:ignore="SpeakableTextPresentCheck" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -91,4 +64,75 @@
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="410dp"
+        android:layout_height="126dp"
+        android:layout_marginTop="70dp"
+        android:background="#00FFFFFF"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="186dp"
+            android:layout_height="42dp"
+            app:layout_column="0"
+            app:layout_row="1"
+            app:srcCompat="@drawable/repense_icon" />
+
+        <TextView
+            android:id="@+id/totalRepenseTextView"
+            android:layout_width="225dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="999999"
+            android:textAlignment="viewStart"
+            android:textSize="20sp"
+            app:layout_column="1"
+            app:layout_row="1" />
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="186dp"
+            android:layout_height="42dp"
+            android:layout_weight="1"
+            app:layout_column="0"
+            app:layout_row="0"
+            app:srcCompat="@drawable/income_icon" />
+
+        <TextView
+            android:id="@+id/totalIncomeTextView"
+            android:layout_width="225dp"
+            android:layout_height="42dp"
+            android:background="#00FFFFFF"
+            android:gravity="center"
+            android:text="999999"
+            android:textAlignment="textStart"
+            android:textAllCaps="false"
+            android:textSize="20sp"
+            app:layout_column="1"
+            app:layout_row="0" />
+
+        <TextView
+            android:id="@+id/totalCountTextView"
+            android:layout_width="225dp"
+            android:layout_height="42dp"
+            android:gravity="center"
+            android:text="999999"
+            android:textAlignment="viewStart"
+            android:textSize="20sp"
+            app:layout_column="1"
+            app:layout_row="2" />
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="186dp"
+            android:layout_height="42dp"
+            app:layout_column="0"
+            app:layout_row="2"
+            app:srcCompat="@drawable/total_icon" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,9 +40,9 @@ class RecordsActivity : AppCompatActivity() {
         setIncomeTotal()
         setRepenseTotal()
 
-        totalIncomeTextView.text = "總收入:${incomeTotal}"
-        totalRespenseTextView.text = "總支出:${repenseTotoal}"
-        totalCountTextView.text = "損益:${getTotalCount()}"
+        totalIncomeTextView.text = "${incomeTotal}元"
+        totalRespenseTextView.text = "${repenseTotoal}元"
+        totalCountTextView.text = "${getTotalCount()}元"
 
         setListener()
         getItem()
@@ -96,7 +96,7 @@ class RecordsActivity : AppCompatActivity() {
     }
 
     private fun setReturnButton() {
-        var returnButton = findViewById<Button>(R.id.recordsReturnButton)
+        var returnButton = findViewById<ImageButton>(R.id.recordsReturnImageButton)
 
         returnButton.setOnClickListener {
             finish()

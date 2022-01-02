@@ -104,7 +104,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
     }
 
     private fun setReturnButton() {
-        var returnButton = findViewById<Button>(R.id.storeReturnButton)
+        var returnButton = findViewById<ImageButton>(R.id.storeReturnImageButton)
 
         returnButton.setOnClickListener {
             val bundle = Bundle()

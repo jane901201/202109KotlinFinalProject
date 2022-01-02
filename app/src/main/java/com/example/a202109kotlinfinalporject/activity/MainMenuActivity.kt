@@ -21,6 +21,8 @@ class MainMenuActivity : AppCompatActivity() {
     private var foodItems: ArrayList<FoodItem> = ArrayList()
     private var recordsData:ArrayList<RecordsData> = ArrayList()
     private var userData: UserData = UserData("", "", 999, 0)//TODO:Test coin
+    private val stage2GrowPoint = 50
+    private val stage3GrowPoint = 100
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -89,6 +91,7 @@ class MainMenuActivity : AppCompatActivity() {
 
             bundle.putIntArray("foodItemsArray", foodItemCounts)
             bundle.putString("petName", userData.pet)
+            bundle.putInt("growPoint", userData.growPoint)
 
             val intent = Intent( this, FeedPetActivity::class.java)
             intent.putExtras(bundle)
@@ -154,6 +157,7 @@ class MainMenuActivity : AppCompatActivity() {
                     foodItems[i].count = foodItemCounts?.get(i) ?:
                             Log.i("MainMenuActivity" ,"${foodItems[i].name} count ${foodItems[i].count}")
                 }
+                setPetImage()
             }
         }
 
@@ -196,13 +200,53 @@ class MainMenuActivity : AppCompatActivity() {
     private fun setPetImage() {
         val petImageButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
 
-        if(userData.pet == "箱子") {
-            petImageButton.setImageResource(R.drawable.box)
-        }else if(userData.pet == "蛋") {
-            petImageButton.setImageResource(R.drawable.egg)
-        }else if(userData.pet == "石頭") {
-            petImageButton.setImageResource(R.drawable.stone)
+        if(isFullStage3GrowPoint()) {
+            if(userData.pet == "箱子") {
+                petImageButton.setImageResource(R.drawable.box_stage3_the_great_wall)
+                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                        "的寵物長城"
+            }else if(userData.pet == "蛋") {
+                petImageButton.setImageResource(R.drawable.egg_stage3_omurice)
+                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                        "的寵物蛋包飯"
+            }else if(userData.pet == "石頭") {
+                petImageButton.setImageResource(R.drawable.stone_stage3_diamond)
+                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                        "的寵物鑽石"
+            }
+        }else if(isFullStage2GrowPoint()) {
+            if(userData.pet == "箱子") {
+                petImageButton.setImageResource(R.drawable.box_stage2_cardboard)
+                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                        "的寵物紙板"
+            }else if(userData.pet == "蛋") {
+                petImageButton.setImageResource(R.drawable.egg_stage2_sunny_side_up_egg)
+                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                        "的寵物荷包蛋"
+            }else if(userData.pet == "石頭") {
+                petImageButton.setImageResource(R.drawable.stone_stage2_ore)
+                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                        "的寵物礦石"
+            }
+        } else {
+            if(userData.pet == "箱子") {
+                petImageButton.setImageResource(R.drawable.box)
+            }else if(userData.pet == "蛋") {
+                petImageButton.setImageResource(R.drawable.egg)
+            }else if(userData.pet == "石頭") {
+                petImageButton.setImageResource(R.drawable.stone)
+            }
         }
+    }
+
+    private fun isFullStage2GrowPoint(): Boolean {
+        if(userData.growPoint in stage2GrowPoint..stage3GrowPoint) return true
+        return false
+    }
+
+    private fun isFullStage3GrowPoint(): Boolean {
+        if(userData.growPoint >= stage3GrowPoint) return true
+        return false
     }
 
     private fun setFoodItem() {

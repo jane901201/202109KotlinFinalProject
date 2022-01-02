@@ -8,7 +8,20 @@
     tools:context=".activity.FeedPetActivity">
 
     <ImageButton
-        android:id="@+id/petButton"
+        android:id="@+id/feedPetReturnImageButton"
+        android:layout_width="66dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/return_button"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageButton
+        android:id="@+id/petImageButton"
         android:layout_width="236dp"
         android:layout_height="229dp"
         android:layout_marginStart="84dp"
@@ -27,18 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
         android:layout_marginTop="28dp"
-        android:text="成長條"
+        android:text="成長值:"
         android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/feedPetReturnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="292dp"
-        android:layout_marginTop="16dp"
-        android:text="返回"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,5 +52,6 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="1dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/petButton" />
+        app:layout_constraintTop_toBottomOf="@+id/petImageButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

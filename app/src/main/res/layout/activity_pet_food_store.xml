@@ -7,6 +7,19 @@
     android:background="#FAF0BF"
     tools:context=".activity.PetFoodStoreActivity">
 
+    <ImageButton
+        android:id="@+id/storeReturnImageButton"
+        android:layout_width="66dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="328dp"
+        android:layout_marginTop="16dp"
+        android:background="#00FFFFFF"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/return_button"
+        tools:ignore="SpeakableTextPresentCheck" />
+
     <TextView
         android:id="@+id/petStorePetCoinTextView"
         android:layout_width="141dp"
@@ -16,16 +29,6 @@
         android:text="寵物幣:0"
         android:textSize="25sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/storeReturnButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="106dp"
-        android:layout_marginTop="18dp"
-        android:text="返回"
-        app:layout_constraintStart_toEndOf="@+id/petStorePetCoinTextView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <GridView
