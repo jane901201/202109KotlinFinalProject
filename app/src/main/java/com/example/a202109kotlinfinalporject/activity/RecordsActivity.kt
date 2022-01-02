@@ -102,8 +102,4 @@ class RecordsActivity : AppCompatActivity() {
             finish()
         }
     }
-
-    private fun showToast(text: String) =
-        Toast.makeText(this,text, Toast.LENGTH_LONG).show()
-
 }

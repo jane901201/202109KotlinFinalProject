@@ -42,7 +42,7 @@ class MainMenuActivity : AppCompatActivity() {
         var bookkeepingRegister = bookKeepingRegister()
 
         bookKeepingButton.setOnClickListener {
-            showToast("bookKeeping")
+            showToast("開啟記帳選單")
             val intent = Intent(this, BookkeepingActivity::class.java)
             bookkeepingRegister.launch(intent)
         }
@@ -60,7 +60,7 @@ class MainMenuActivity : AppCompatActivity() {
         val storeButton = findViewById<ImageButton>(R.id.openStoreImageButton)
 
         storeButton.setOnClickListener {
-            showToast("storeButton")
+            showToast("開啟商店")
 
             val bundle = Bundle()
             var foodItemCounts = IntArray(6)
@@ -81,7 +81,7 @@ class MainMenuActivity : AppCompatActivity() {
         val petButton = findViewById<ImageButton>(R.id.mainMenuPetButton)
 
         petButton.setOnClickListener {
-            showToast("petButton")
+            showToast("開啟寵物養成面板")
             val bundle = Bundle()
             var foodItemCounts = IntArray(6)
             for(i in 0..(foodItemCounts.size - 1)) {
@@ -103,7 +103,7 @@ class MainMenuActivity : AppCompatActivity() {
         val recordsButton = findViewById<ImageButton>(R.id.openRecordsImageButton)
 
         recordsButton.setOnClickListener {
-            showToast("recordsButton")
+            showToast("開啟紀錄按鈕")
             var bundle = Bundle()
 
             var costTypes: ArrayList<String> = ArrayList()
@@ -275,7 +275,6 @@ class MainMenuActivity : AppCompatActivity() {
             foodItems.add(FoodItem(photo, name, 0, price))
         }
 
-        showToast("FoodItem count${foodItems.count()}")
         array.recycle()
     }
 

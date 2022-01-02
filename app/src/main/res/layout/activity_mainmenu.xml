@@ -29,37 +29,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageButton
-        android:id="@+id/openRecordsImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="68dp"
+    <LinearLayout
+        android:layout_width="426dp"
+        android:layout_height="64dp"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/openBookkeepingImageButton"
-        app:srcCompat="@android:drawable/ic_menu_agenda"
-        tools:ignore="SpeakableTextPresentCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/mainMenuPetButton">
 
-    <ImageButton
-        android:id="@+id/openBookkeepingImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="72dp"
-        app:layout_constraintStart_toEndOf="@+id/openRecordsImageButton"
-        app:layout_constraintTop_toBottomOf="@+id/mainMenuPetButton"
-        app:srcCompat="@android:drawable/btn_star"
-        tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/openRecordsImageButton"
+            android:layout_width="104dp"
+            android:layout_height="65dp"
+            android:layout_marginStart="0dp"
+            app:srcCompat="@android:drawable/ic_menu_agenda"
+            tools:ignore="SpeakableTextPresentCheck" />
 
-    <ImageButton
-        android:id="@+id/openStoreImageButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:minHeight="48dp"
-        app:layout_constraintStart_toEndOf="@+id/openBookkeepingImageButton"
-        app:layout_constraintTop_toTopOf="@+id/openBookkeepingImageButton"
-        app:srcCompat="?attr/actionModeSelectAllDrawable"
-        tools:ignore="SpeakableTextPresentCheck" />
+        <ImageButton
+            android:id="@+id/openBookkeepingImageButton"
+            android:layout_width="218dp"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/btn_star"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageButton
+            android:id="@+id/openStoreImageButton"
+            android:layout_width="104dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="0dp"
+            android:minHeight="48dp"
+            app:srcCompat="?attr/actionModeSelectAllDrawable"
+            tools:ignore="SpeakableTextPresentCheck" />
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/mainMenuPetButton"

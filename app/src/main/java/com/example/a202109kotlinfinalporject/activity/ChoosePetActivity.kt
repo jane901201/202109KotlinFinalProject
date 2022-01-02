@@ -25,19 +25,19 @@ class ChoosePetActivity : AppCompatActivity() {
 
         boxImageButton.setOnClickListener {
             choosePet = "箱子"
-            showToast("Choose ${choosePet}")
+            showToast("選擇 ${choosePet}")
             nextActivitySetting()
         }
 
         eggImageButton.setOnClickListener {
             choosePet = "蛋"
-            showToast("Choose ${choosePet}")
+            showToast("選擇 ${choosePet}")
             nextActivitySetting()
         }
 
         stoneImageButton.setOnClickListener {
             choosePet = "石頭"
-            showToast("Choose ${choosePet}")
+            showToast("選擇 ${choosePet}")
             nextActivitySetting()
         }
     }
