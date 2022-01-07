@@ -184,8 +184,7 @@ class MainMenuActivity : AppCompatActivity() {
     private fun registerUserNameAndChoosePet() {
             val register = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
                 if(it.resultCode == Activity.RESULT_OK){
-                    findViewById<TextView>(R.id.petNameTextView).text= it.data?.getStringExtra("name")+
-                            "的寵物"+it.data?.getStringExtra("pet")
+                    findViewById<TextView>(R.id.petNameTextView).text= it.data?.getStringExtra("name")
                     userData.name = it.data?.getStringExtra("name").toString()
                     userData.pet = it.data?.getStringExtra("pet").toString()
 
@@ -203,29 +202,29 @@ class MainMenuActivity : AppCompatActivity() {
         if(isFullStage3GrowPoint()) {
             if(userData.pet == "箱子") {
                 petImageButton.setImageResource(R.drawable.box_stage3_the_great_wall)
-                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
                         "的寵物長城"
             }else if(userData.pet == "蛋") {
                 petImageButton.setImageResource(R.drawable.egg_stage3_omurice)
-                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
                         "的寵物蛋包飯"
             }else if(userData.pet == "石頭") {
                 petImageButton.setImageResource(R.drawable.stone_stage3_diamond)
-                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
                         "的寵物鑽石"
             }
         }else if(isFullStage2GrowPoint()) {
             if(userData.pet == "箱子") {
                 petImageButton.setImageResource(R.drawable.box_stage2_cardboard)
-                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
                         "的寵物紙板"
             }else if(userData.pet == "蛋") {
                 petImageButton.setImageResource(R.drawable.egg_stage2_sunny_side_up_egg)
-                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
                         "的寵物荷包蛋"
             }else if(userData.pet == "石頭") {
                 petImageButton.setImageResource(R.drawable.stone_stage2_ore)
-                findViewById<TextView>(R.id.petNameTextView).text= userData.name+
+                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
                         "的寵物礦石"
             }
         } else {

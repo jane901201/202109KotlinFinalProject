@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_001"
+    android:background="@drawable/background2"
     tools:context=".activity.RecordsActivity">
 
     <ImageButton
@@ -24,6 +24,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="398dp"
         android:layout_height="41dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="200dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,7 @@
 
         <TextView
             android:id="@+id/textView4"
-            android:layout_width="76dp"
+            android:layout_width="126dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="收入/支出"
@@ -41,7 +42,7 @@
 
         <TextView
             android:id="@+id/textView5"
-            android:layout_width="70dp"
+            android:layout_width="147dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="紀錄名稱"
@@ -58,18 +59,22 @@
 
     <ListView
         android:id="@+id/recordsListView"
-        android:layout_width="409dp"
+        android:layout_width="380dp"
         android:layout_height="524dp"
-        android:layout_marginStart="1dp"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="1dp"
+        android:layout_marginEnd="20dp"
+        android:background="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
     <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/back"
         android:layout_width="410dp"
         android:layout_height="126dp"
         android:layout_marginTop="70dp"
-        android:background="#00FFFFFF"
+        android:background="#00F6F6F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

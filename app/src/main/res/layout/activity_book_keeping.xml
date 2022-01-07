@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_001"
+    android:background="@drawable/background2"
     tools:context=".activity.BookkeepingActivity">
 
     <EditText
@@ -27,9 +27,9 @@
         android:layout_marginStart="120dp"
         android:layout_marginTop="56dp"
         android:ems="10"
+        android:hint="紀錄名稱"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="紀錄名稱"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
@@ -37,24 +37,24 @@
         android:id="@+id/radioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="60dp"
-        android:layout_marginTop="142dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="140dp"
         android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <RadioButton
             android:id="@+id/incomeRadioButton"
-            android:layout_width="148dp"
-            android:layout_height="wrap_content"
-            android:text="收入" />
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:background="@drawable/income_icon" />
 
         <RadioButton
             android:id="@+id/expenseRadioButton"
-            android:layout_width="159dp"
-            android:layout_height="wrap_content"
-            android:checked="true"
-            android:text="支出" />
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:background="@drawable/repense_icon"
+            android:checked="true" />
     </RadioGroup>
 
     <TextView
@@ -72,8 +72,8 @@
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="64dp"
         android:text="紀錄名稱"
         android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"

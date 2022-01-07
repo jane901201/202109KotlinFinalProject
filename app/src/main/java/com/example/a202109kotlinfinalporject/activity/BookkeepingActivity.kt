@@ -34,8 +34,8 @@ class BookkeepingActivity : AppCompatActivity() {
             val recordsNameEditText = findViewById<EditText>(R.id.recordNameEditView)
 
             var  cost = costEditText.text.toString().toInt()
-            if(radioGroup.checkedRadioButtonId == 2131231244) costType = "收入"
-            else if(radioGroup.checkedRadioButtonId == 2131231243)costType = "支出"
+            if(radioGroup.checkedRadioButtonId == R.id.incomeRadioButton) costType = "收入"
+            else if(radioGroup.checkedRadioButtonId == R.id.expenseRadioButton)costType = "支出"
 
             val bundle = Bundle()
 
