@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
+    android:background="#ECE9D4"
     tools:context=".activity.PetFoodStoreActivity">
 
     <ImageButton
@@ -33,9 +33,11 @@
 
     <GridView
         android:id="@+id/storeFoodGridView"
-        android:layout_width="409dp"
-        android:layout_height="663dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="371dp"
+        android:layout_height="623dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="45dp"
+        android:layout_marginEnd="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"

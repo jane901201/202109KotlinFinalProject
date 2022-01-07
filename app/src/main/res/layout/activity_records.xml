@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background2"
+    android:background="#ECE9D4"
     tools:context=".activity.RecordsActivity">
 
     <ImageButton
@@ -20,60 +20,11 @@
         app:srcCompat="@drawable/return_button"
         tools:ignore="SpeakableTextPresentCheck" />
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="398dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="200dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="126dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="收入/支出"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="147dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="紀錄名稱"
-            android:textSize="25sp" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="金額"
-            android:textSize="25sp" />
-    </LinearLayout>
-
-    <ListView
-        android:id="@+id/recordsListView"
-        android:layout_width="380dp"
-        android:layout_height="524dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="1dp"
-        android:layout_marginEnd="20dp"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
-
     <androidx.gridlayout.widget.GridLayout
         android:id="@+id/back"
         android:layout_width="410dp"
         android:layout_height="126dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:background="#00F6F6F6"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -139,5 +90,53 @@
             app:srcCompat="@drawable/total_icon" />
 
     </androidx.gridlayout.widget.GridLayout>
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="416dp"
+        android:layout_height="544dp"
+        android:layout_marginTop="13dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back"
+        app:srcCompat="@drawable/matter_records_background" />
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="114dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        app:srcCompat="@drawable/income_expense_text" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="55dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView10"
+        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        app:srcCompat="@drawable/matter" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="73dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintStart_toEndOf="@+id/imageView11"
+        app:layout_constraintTop_toTopOf="@+id/imageView9"
+        app:srcCompat="@drawable/cost_text" />
+
+    <ListView
+        android:id="@+id/recordsListView"
+        android:layout_width="276dp"
+        android:layout_height="446dp"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView9" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

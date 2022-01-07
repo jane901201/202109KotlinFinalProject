@@ -33,17 +33,22 @@ class BookkeepingActivity : AppCompatActivity() {
             val costEditText = findViewById<EditText>(R.id.CostEditText)
             val recordsNameEditText = findViewById<EditText>(R.id.recordNameEditView)
 
-            var  cost = costEditText.text.toString().toInt()
-            if(radioGroup.checkedRadioButtonId == R.id.incomeRadioButton) costType = "收入"
-            else if(radioGroup.checkedRadioButtonId == R.id.expenseRadioButton)costType = "支出"
+            if(recordsNameEditText.length() < 1) {
+                showToast("請輸入名稱");
+            }
+            else {
+                var  cost = costEditText.text.toString().toInt()
+                if(radioGroup.checkedRadioButtonId == R.id.incomeRadioButton) costType = "收入"
+                else if(radioGroup.checkedRadioButtonId == R.id.expenseRadioButton)costType = "支出"
 
-            val bundle = Bundle()
+                val bundle = Bundle()
 
-            bundle.putString("costType", costType)
-            bundle.putString("name", recordsNameEditText.text.toString())
-            bundle.putInt("price", cost)
-            setResult(RESULT_OK, Intent().putExtras(bundle))
-            finish()
+                bundle.putString("costType", costType)
+                bundle.putString("name", recordsNameEditText.text.toString())
+                bundle.putInt("price", cost)
+                setResult(RESULT_OK, Intent().putExtras(bundle))
+                finish()
+            }
         }
     }
 
@@ -55,4 +60,8 @@ class BookkeepingActivity : AppCompatActivity() {
             finish()
         }
     }
+
+    private fun showToast(text: String) =
+        Toast.makeText(this,text, Toast.LENGTH_LONG).show()
+
 }

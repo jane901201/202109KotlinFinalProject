@@ -86,7 +86,7 @@ class RecordsActivity : AppCompatActivity() {
 
     private fun setItems() {
         for(i in 0 until names.size) {
-            items.add("${costTypes[i]}\t\t\t\t\t\t\t\t\t\t\t\t\t\t ${names[i]}\t\t\t\t\t\t\t\t\t" +
+            items.add("${costTypes[i]}\t\t\t\t\t\t\t\t\t ${names[i]}\t\t\t\t\t\t" +
                     " ${prices[i]}元")
         }
     }
