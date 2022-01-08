@@ -53,7 +53,7 @@ class MainMenuActivity : AppCompatActivity() {
     }
 
     private fun setPetCoinTextView(coin: Int) {
-        findViewById<TextView>(R.id.mainMenuPetCoinTextView).text = "寵物幣:${coin}"
+        findViewById<TextView>(R.id.mainMenuPetCoinTextView).text = "${coin}"
     }
 
     private fun setStoreButton(storeRegister: ActivityResultLauncher<Intent>) {
@@ -202,30 +202,18 @@ class MainMenuActivity : AppCompatActivity() {
         if(isFullStage3GrowPoint()) {
             if(userData.pet == "箱子") {
                 petImageButton.setImageResource(R.drawable.box_stage3_the_great_wall)
-                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
-                        "的寵物長城"
             }else if(userData.pet == "蛋") {
                 petImageButton.setImageResource(R.drawable.egg_stage3_omurice)
-                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
-                        "的寵物蛋包飯"
             }else if(userData.pet == "石頭") {
                 petImageButton.setImageResource(R.drawable.stone_stage3_diamond)
-                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
-                        "的寵物鑽石"
             }
         }else if(isFullStage2GrowPoint()) {
             if(userData.pet == "箱子") {
                 petImageButton.setImageResource(R.drawable.box_stage2_cardboard)
-                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
-                        "的寵物紙板"
             }else if(userData.pet == "蛋") {
                 petImageButton.setImageResource(R.drawable.egg_stage2_sunny_side_up_egg)
-                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
-                        "的寵物荷包蛋"
             }else if(userData.pet == "石頭") {
                 petImageButton.setImageResource(R.drawable.stone_stage2_ore)
-                //findViewById<TextView>(R.id.petNameTextView).text= userData.name+
-                        "的寵物礦石"
             }
         } else {
             if(userData.pet == "箱子") {

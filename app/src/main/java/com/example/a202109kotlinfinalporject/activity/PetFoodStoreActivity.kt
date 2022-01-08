@@ -23,7 +23,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
         val petCoin = findViewById<TextView>(R.id.petStorePetCoinTextView)
 
         intent?.extras?.let{
-            petCoin.text = "寵物幣:${it.getInt("coin").toString()}"
+            petCoin.text = "${it.getInt("coin").toString()}"
             coin = it.getInt("coin")
             foodItemCounts = it.getIntArray("foodItemsArray")!!
         }
@@ -85,7 +85,7 @@ class PetFoodStoreActivity : AppCompatActivity() {
     private fun cost(price: Int) {
         var petStoreCoin = findViewById<TextView>(R.id.petStorePetCoinTextView)
         coin -= price
-        petStoreCoin.text = "寵物幣:${coin}"
+        petStoreCoin.text = "${coin}"
     }
 
     private fun addCount(name: String, textView: TextView) {
