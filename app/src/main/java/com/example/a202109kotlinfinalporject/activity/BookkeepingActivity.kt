@@ -36,6 +36,9 @@ class BookkeepingActivity : AppCompatActivity() {
             if(recordsNameEditText.length() < 1) {
                 showToast("請輸入名稱");
             }
+            else if(costEditText.length() < 1) {
+                showToast("金額不能為空")
+            }
             else {
                 var  cost = costEditText.text.toString().toInt()
                 if(radioGroup.checkedRadioButtonId == R.id.incomeRadioButton) costType = "收入"

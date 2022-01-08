@@ -24,21 +24,33 @@ class ChoosePetActivity : AppCompatActivity() {
         var stoneImageButton = findViewById<ImageButton>(R.id.stoneImageButton)
 
         boxImageButton.setOnClickListener {
-            choosePet = "箱子"
-            showToast("選擇 ${choosePet}")
-            nextActivitySetting()
+            if(findViewById<EditText>(R.id.editTextTextPersonName).length() < 1) {
+                showToast("請輸入寵物名稱")
+            } else {
+                choosePet = "箱子"
+                showToast("選擇 ${choosePet}")
+                nextActivitySetting()
+            }
         }
 
         eggImageButton.setOnClickListener {
-            choosePet = "蛋"
-            showToast("選擇 ${choosePet}")
-            nextActivitySetting()
+            if(findViewById<EditText>(R.id.editTextTextPersonName).length() < 1) {
+                showToast("請輸入寵物名稱")
+            } else {
+                choosePet = "蛋"
+                showToast("選擇 ${choosePet}")
+                nextActivitySetting()
+            }
         }
 
         stoneImageButton.setOnClickListener {
-            choosePet = "石頭"
-            showToast("選擇 ${choosePet}")
-            nextActivitySetting()
+            if(findViewById<EditText>(R.id.editTextTextPersonName).length() < 1) {
+                showToast("請輸入寵物名稱")
+            } else {
+                choosePet = "石頭"
+                showToast("選擇 ${choosePet}")
+                nextActivitySetting()
+            }
         }
     }
 

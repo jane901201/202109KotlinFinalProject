@@ -14,9 +14,9 @@
         android:layout_marginStart="72dp"
         android:layout_marginTop="32dp"
         android:ems="10"
+        android:hint="請輸入寵物名稱"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="請輸入寵物名稱"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

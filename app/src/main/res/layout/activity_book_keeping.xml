@@ -14,9 +14,9 @@
         android:layout_marginStart="96dp"
         android:layout_marginTop="54dp"
         android:ems="10"
+        android:hint="請輸入金額"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:text="0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
